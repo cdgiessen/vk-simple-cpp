@@ -112,187 +112,6 @@ constexpr uint32_t make_vk_version(uint32_t major, uint32_t minor, uint32_t patc
 #endif
 '''
 
-custom_data_structures = '''
-/* Return type for Vulkan Module API functions which return a value or values
- * Holds a T value or a vk::Result for indicating the error
- * Do not use with success codes other than zero
- * Example in function definition
- * vk::expected<vk::Buffer> CreateBuffer(const BufferCreateInfo& pCreateInfo, const AllocationCallbacks* pAllocator = nullptr) { ... }
- * Example usage:
- * auto buffer_return  = CreateBuffer( ... );
- * if (!buffer_return)
- *     error_exit("Failed to create buffer", buffer_return.error());
- * vk::Buffer buffer = buffer_return.value(); //Get value now that we've check for errors
- */
-template<typename T>
-struct expected {
-	explicit expected (T const& value, Result result) noexcept: _value{ value}, _result{ result } {}
-	explicit expected (T&& value, Result result) noexcept: _value{ std::move(value) }, _result{ result } {}
-
-    const T* operator-> () const noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return &_value; }
-	T*       operator-> ()       noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return &_value; }
-	const T& operator* () const& noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return _value; }
-	T&       operator* () &      noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return _value; }
-	T&&      operator* () &&	 noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return std::move (_value); }
-	const T&  value () const&    noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return _value; }
-	T&        value () &         noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return _value; }
-	const T&& value () const&&   noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return std::move(_value); }
-	T&&       value () &&        noexcept { VULKAN_CUSTOM_ASSERT (_result == Result::Success); return std::move(_value); }
-
-    Result error() const noexcept { VULKAN_CUSTOM_ASSERT (_result != Result::Success); return _result; }
-    Result raw_result() const noexcept { return _result; }
-
-    bool has_value () const noexcept { return _result == Result::Success; }
-	explicit operator bool () const noexcept { return _result == Result::Success; }
-    bool operator!() const noexcept { return _result != Result::Success; }
-
-    template <size_t N>
-    auto const& get() const noexcept {
-       if constexpr (N == 0) return _value;
-       else if constexpr (N == 1) return _result;
-    }
-    template <size_t N>
-    auto& get() noexcept {
-       if constexpr (N == 0) return _value;
-       else if constexpr (N == 1) return _result;
-    }
-
-private:
-    T _value;
-    Result _result = Result::Success;
-};
-
-} //namespace vk
-
-namespace std {
-    template<typename T>
-    struct tuple_size<vk::expected<T>>: std::integral_constant<size_t, 2> {};
-    template<typename T> struct tuple_element<0, vk::expected<T>> { using type = T; };
-    template<typename T> struct tuple_element<1, vk::expected<T>> { using type = vk::Result; };
-}
-
-namespace vk {
-namespace detail {
-template<typename T>
-class span {
-public:
-    constexpr span() noexcept = default;
-    constexpr span(T const& value) noexcept : _data{ std::addressof(const_cast<T&>(value)) }, _count{1} {}
-    constexpr explicit span(T* data, uint32_t count) noexcept : _data{data}, _count{count} {}
-
-    // requires std::data(Range const&)
-    // requires std::size(Range const&)
-    template <typename Range>
-    explicit span(Range const& range) noexcept :
-        _data{std::data(range)}, _count{std::size(range)} {}
-
-    template< std::size_t N >
-    span(std::array<T, N>& arr ) noexcept :
-        _data{std::data(arr)}, _count{std::size(arr)} {}
-
-    template< std::size_t N >
-    span(std::array<T, N> const& arr ) noexcept :
-        _data{std::data(arr)}, _count{std::size(arr)} {}
-
-    span( std::initializer_list<T>& data ) noexcept :
-        _data{data.begin()}, _count{static_cast<uint32_t>(data.size())} {}
-
-    span( std::initializer_list<T> const& data ) noexcept :
-        _data{data.begin()}, _count{static_cast<uint32_t>(data.size())} {}
-
-    template <typename A = T, typename std::enable_if<std::is_const<A>::value, int>::type = 0>
-    span( std::initializer_list<typename std::remove_const<T>::type> const& data ) noexcept :
-        _data{data.begin()}, _count{static_cast<uint32_t>(data.size())} {}
-
-    template <typename A = T, typename std::enable_if<std::is_const<A>::value, int>::type = 0>
-    span( std::initializer_list<typename std::remove_const<T>::type> & data ) noexcept :
-        _data{data.begin()}, _count{static_cast<uint32_t>(data.size())} {}
-
-    [[nodiscard]] uint32_t size() noexcept { return _count; }
-    [[nodiscard]] uint32_t size() const noexcept { return _count; }
-    [[nodiscard]] uint32_t size_bytes() const noexcept { return _count * sizeof(T); }
-
-    [[nodiscard]] T* data() noexcept { return _data; }
-    [[nodiscard]] const T* data() const noexcept { return _data; }
-    [[nodiscard]] bool empty() const noexcept { return _count == 0; }
-
-    [[nodiscard]] T const& operator[](uint32_t count) & noexcept { return _data[count]; }
-    [[nodiscard]] T const& operator[](uint32_t count) const& noexcept { return _data[count]; }
-
-    [[nodiscard]] const T* begin() const noexcept { return _data + 0; }
-    [[nodiscard]] const T* begin() noexcept { return _data + 0; }
-    [[nodiscard]] const T* end() const noexcept { return _data + _count; }
-    [[nodiscard]] const T* end() noexcept { return _data + _count; }
-private:
-    T* _data;
-    uint32_t _count;
-};
-} // namespace detail
-
-// Unique Handle wrapper for RAII handle types
-// DispatchableHandle is a `VkInstance` or `VkDevice` handle
-// HandleType is a `vk::Handle` type
-// Delete is a PFN_vk*** function that matches the desired type
-template <typename DispatchableHandle, typename HandleType, typename Deleter>
-class unique_handle
-{
-public:
-    unique_handle() = default;
-    explicit unique_handle(DispatchableHandle dispatch_handle, HandleType handle, Deleter deleter) noexcept
-        : dispatch_handle(dispatch_handle), handle(handle), deleter(deleter) { }
-    ~unique_handle() noexcept { reset(); };
-    unique_handle(unique_handle const& other) = delete;
-    unique_handle& operator=(unique_handle const& other) = delete;
-
-    unique_handle(unique_handle&& other) noexcept
-        : dispatch_handle{other.dispatch_handle},
-          handle{std::exchange(other.handle, nullptr)},
-          deleter{other.deleter} { }
-    unique_handle& operator=(unique_handle&& other) noexcept
-    {
-        if (this != &other)
-        {
-            reset();
-            dispatch_handle = other.dispatch_handle;
-            handle = std::exchange(other.handle, {});
-            deleter = other.deleter;
-        }
-        return *this;
-    }
-
-    HandleType release() noexcept {
-        return std::exchange(handle, {});
-    }
-
-    void reset() noexcept {
-        if (handle)
-        {
-            deleter(dispatch_handle, handle.get(), nullptr);
-        }
-    }
-
-    const HandleType address() const noexcept {
-        return std::addressof(handle.get());
-    }
-
-    HandleType operator*() const noexcept {
-        return handle;
-    }
-
-    [[nodiscard]] HandleType get() const noexcept { return handle; }
-
-    HandleType operator->() const noexcept { return handle; }
-
-    explicit operator bool() const noexcept { return handle; }
-
-    DispatchableHandle dispatch_handle;
-    HandleType handle;
-    Deleter deleter;
-};
-
-// Add special case for VkInstance
-'''
-
 bitmask_flags_macro = '''
 #define DECLARE_ENUM_FLAG_OPERATORS(FLAG_TYPE, FLAG_BITS, BASE_TYPE)                       \\
                                                                                            \\
@@ -343,118 +162,8 @@ constexpr FLAG_TYPE operator^(FLAG_BITS a, FLAG_BITS b) noexcept {              
     return static_cast<FLAG_TYPE>(static_cast<BASE_TYPE>(a) ^ static_cast<BASE_TYPE>(b));  \\
 }                                                                                          \\
 '''
-vulkan_library_text = '''
-} // namespace vk
-#if defined(_WIN32)
-    typedef struct HINSTANCE__ * HINSTANCE;
-    #if defined( _WIN64 )
-    typedef int64_t( __stdcall * FARPROC )();
-    #else
-    typedef int( __stdcall * FARPROC )();
-    #endif
-    extern "C" __declspec( dllimport ) HINSTANCE __stdcall LoadLibraryA( char const * lpLibFileName );
-    extern "C" __declspec( dllimport ) int __stdcall FreeLibrary( HINSTANCE hLibModule );
-    extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE hModule, const char * lpProcName );
-#elif defined(__linux__) || defined(__APPLE__)
-    #include <dlfcn.h>
-#endif
-using PFN_vkVoidFunction = void (VKAPI_PTR *)(void);
-using PFN_vkGetInstanceProcAddr = PFN_vkVoidFunction (VKAPI_PTR *)(VkInstance instance, const char* pName);
-namespace vk {
-class DynamicLibrary {
-    public:
-    // Used to enable RAII vk::DynamicLibrary behavior
-    struct LoadAtConstruction {};
 
-    explicit DynamicLibrary() noexcept {}
-    explicit DynamicLibrary([[maybe_unused]] LoadAtConstruction load) noexcept {
-        init();
-    }
-    explicit DynamicLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr) noexcept :
-        get_instance_proc_addr(pfn_vkGetInstanceProcAddr) { }
-    ~DynamicLibrary() noexcept {
-        close();
-    }
-    DynamicLibrary(DynamicLibrary const& other) = delete;
-    DynamicLibrary& operator=(DynamicLibrary const& other) = delete;
-    DynamicLibrary(DynamicLibrary && other) noexcept: library(other.library), get_instance_proc_addr(other.get_instance_proc_addr) {
-        other.get_instance_proc_addr = 0;
-        other.library = 0;
-    }
-    DynamicLibrary& operator=(DynamicLibrary && other) noexcept {
-        if (this != &other)
-        {
-            close();
-            library = other.library;
-            get_instance_proc_addr = other.get_instance_proc_addr;
-            other.get_instance_proc_addr = 0;
-            other.library = 0;
-        }
-        return *this;
-    }
-
-    Result init(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = nullptr) noexcept {
-        if (pfn_vkGetInstanceProcAddr != nullptr) {
-            get_instance_proc_addr = pfn_vkGetInstanceProcAddr;
-            return Result::Success;
-        }
-#if defined(__linux__)
-        library = dlopen("libvulkan.so", RTLD_NOW | RTLD_LOCAL);
-        if (!library) library = dlopen("libvulkan.so.1", RTLD_NOW | RTLD_LOCAL);
-#elif defined(__APPLE__)
-        library = dlopen("libvulkan.dylib", RTLD_NOW | RTLD_LOCAL);
-#elif defined(_WIN32)
-        library = ::LoadLibraryA("vulkan-1.dll");
-#endif
-        if (library == 0) return Result::ErrorInitializationFailed;
-        Load(get_instance_proc_addr, "vkGetInstanceProcAddr");
-        if (get_instance_proc_addr == nullptr) return Result::ErrorInitializationFailed;
-        return Result::Success;
-    }
-    void close() noexcept {
-        if (library != nullptr) {
-#if defined(__linux__) || defined(__APPLE__)
-            dlclose(library);
-#elif defined(_WIN32)
-            ::FreeLibrary(library);
-#endif
-        library = 0;
-        }
-    }
-
-    // Check if vulkan is loaded and ready for use
-    [[nodiscard]] bool is_init() const noexcept { return get_instance_proc_addr != 0; }
-
-    // Get `vkGetInstanceProcAddr` if it was loaded, 0 if not
-    [[nodiscard]] PFN_vkGetInstanceProcAddr get() const noexcept {
-        VULKAN_CUSTOM_ASSERT(get_instance_proc_addr != nullptr && "Must call init() before use");
-        return get_instance_proc_addr;
-    }
-
-private:
-
-    template <typename T>
-    void Load(T &func_dest, const char *func_name) {
-#if defined(__linux__) || defined(__APPLE__)
-        func_dest = reinterpret_cast<T>(dlsym(library, func_name));
-#elif defined(_WIN32)
-        func_dest = reinterpret_cast<T>(::GetProcAddress(library, func_name));
-#endif
-    }
-
-#if defined(__linux__) || defined(__APPLE__)
-    void *library = nullptr;
-#elif defined(_WIN32)
-    ::HINSTANCE library = nullptr;
-#endif
-
-    PFN_vkGetInstanceProcAddr get_instance_proc_addr = nullptr;
-
-};
-
-'''
-
-vulkan_simple_cpp_header_guard = '''
+cpp_header_guard = '''
 // clang-format off
 #ifndef SIMPLE_VULKAN_H_
 #ifdef VULKAN_H_
@@ -472,16 +181,7 @@ vulkan_simple_cpp_header_guard = '''
 #include "vk_platform.h"
 '''
 
-vulkan_simple_cpp_footer = '''
-#if defined(VULKAN_CPP_IMPLEMENTATION)
-#include "vulkan.cpp"
-#endif //defined(VULKAN_CPP_IMPLEMENTATION)
-
-#endif // VULKAN_H_
-// clang-format on
-'''
-
-vulkan_simple_cpp_platform_headers = '''
+cpp_platform_headers = '''
 #if defined(VK_USE_PLATFORM_FUCHSIA)
 #include <zircon/types.h>
 #endif
@@ -512,7 +212,7 @@ vulkan_simple_cpp_platform_headers = '''
 #endif
 '''
 
-vulkan_simple_cpp_footer  = '''
+cpp_footer  = '''
 // This function finds the Vulkan-Loader (vulkan-1.dll, libvulkan.so, libvulkan.dylib, etc) on a system, loads it,
 // and loads the follwing functions:
 //  * vkGetInstanceProcAddr
@@ -585,7 +285,7 @@ void vkInitializeDeviceDispatchTable(VkDevice device, VkDeviceDispatchTable& tab
 // clang-format on
 '''
 
-vulkan_simple_cpp_definition = '''
+cpp_definition = '''
 
 #if defined(_WIN32)
     using HINSTANCE = struct HINSTANCE__ *;

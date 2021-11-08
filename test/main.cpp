@@ -17,19 +17,4 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include "vk_module.h"
-
-TEST_CASE("Union operations", "[vk-module.union]")
-{
-    vk::ClearColorValue x, y;
-    x.float32[0] = 1.f;
-    y.uint32[0] = 1;
-    REQUIRE((x == y) == false);
-    REQUIRE((x != y) == true);
-}
-TEST_CASE("Struct operations", "[vk-module.struct]")
-{
-    vk::Extent2D extent = { 100, 200 };
-    REQUIRE(extent.width == 100);
-    REQUIRE(extent.height == 200);
-}
+#include "vulkan/vulkan.h"

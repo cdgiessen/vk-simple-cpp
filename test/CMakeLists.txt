@@ -18,9 +18,21 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/catchorg/Catch2
     GIT_TAG        v2.13.1
 )
-FetchContent_MakeAvailable(catch2)
+FetchContent_Declare(
+    vma_repo
+    GIT_REPOSITORY https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
+    GIT_TAG        59ec0809a7176ce6b9fa3d6341b477102ac3d3aa
+)
+FetchContent_Declare(
+    vk_bootstrap
+    GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap
+    GIT_TAG        511cac8db4f9d9d5eda95a6e16af74e0731f5f32
+)
+FetchContent_MakeAvailable(catch2 vk_bootstrap)
 
-find_package(Vulkan REQUIRED)
-
-add_subdirectory(simple-api)
-add_subdirectory(fancy-api)
+FetchContent_GetProperties(vma_repo)
+if(NOT vma_repoPOPULATED)
+    FetchContent_Populate(vma_repo)
+    add_library(VulkanMemoryAllocator INTERFACE)
+    target_include_directories(VulkanMemoryAllocator INTERFACE ${vma_repo_SOURCE_DIR}/include)
+endif()
