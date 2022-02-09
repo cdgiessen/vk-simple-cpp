@@ -29,7 +29,7 @@ const char * to_string(VkAttachmentStoreOp val) {
     switch(val) {
         case(VkAttachmentStoreOp::Store): return "Store";
         case(VkAttachmentStoreOp::DontCare): return "DontCare";
-        case(VkAttachmentStoreOp::NoneEXT): return "NoneEXT";
+        case(VkAttachmentStoreOp::None): return "None";
         default: return "UNKNOWN";
     }
 }
@@ -177,10 +177,10 @@ const char * to_string(VkDescriptorType val) {
         case(VkDescriptorType::UniformBufferDynamic): return "UniformBufferDynamic";
         case(VkDescriptorType::StorageBufferDynamic): return "StorageBufferDynamic";
         case(VkDescriptorType::InputAttachment): return "InputAttachment";
-        case(VkDescriptorType::InlineUniformBlockEXT): return "InlineUniformBlockEXT";
         case(VkDescriptorType::AccelerationStructureKHR): return "AccelerationStructureKHR";
         case(VkDescriptorType::AccelerationStructureNV): return "AccelerationStructureNV";
         case(VkDescriptorType::MutableVALVE): return "MutableVALVE";
+        case(VkDescriptorType::InlineUniformBlock): return "InlineUniformBlock";
         default: return "UNKNOWN";
     }
 }
@@ -204,25 +204,25 @@ const char * to_string(VkDynamicState val) {
         case(VkDynamicState::ExclusiveScissorNV): return "ExclusiveScissorNV";
         case(VkDynamicState::FragmentShadingRateKHR): return "FragmentShadingRateKHR";
         case(VkDynamicState::LineStippleEXT): return "LineStippleEXT";
-        case(VkDynamicState::CullModeEXT): return "CullModeEXT";
-        case(VkDynamicState::FrontFaceEXT): return "FrontFaceEXT";
-        case(VkDynamicState::PrimitiveTopologyEXT): return "PrimitiveTopologyEXT";
-        case(VkDynamicState::ViewportWithCountEXT): return "ViewportWithCountEXT";
-        case(VkDynamicState::ScissorWithCountEXT): return "ScissorWithCountEXT";
-        case(VkDynamicState::VertexInputBindingStrideEXT): return "VertexInputBindingStrideEXT";
-        case(VkDynamicState::DepthTestEnableEXT): return "DepthTestEnableEXT";
-        case(VkDynamicState::DepthWriteEnableEXT): return "DepthWriteEnableEXT";
-        case(VkDynamicState::DepthCompareOpEXT): return "DepthCompareOpEXT";
-        case(VkDynamicState::DepthBoundsTestEnableEXT): return "DepthBoundsTestEnableEXT";
-        case(VkDynamicState::StencilTestEnableEXT): return "StencilTestEnableEXT";
-        case(VkDynamicState::StencilOpEXT): return "StencilOpEXT";
         case(VkDynamicState::VertexInputEXT): return "VertexInputEXT";
         case(VkDynamicState::PatchControlPointsEXT): return "PatchControlPointsEXT";
-        case(VkDynamicState::RasterizerDiscardEnableEXT): return "RasterizerDiscardEnableEXT";
-        case(VkDynamicState::DepthBiasEnableEXT): return "DepthBiasEnableEXT";
         case(VkDynamicState::LogicOpEXT): return "LogicOpEXT";
-        case(VkDynamicState::PrimitiveRestartEnableEXT): return "PrimitiveRestartEnableEXT";
         case(VkDynamicState::ColorWriteEnableEXT): return "ColorWriteEnableEXT";
+        case(VkDynamicState::CullMode): return "CullMode";
+        case(VkDynamicState::FrontFace): return "FrontFace";
+        case(VkDynamicState::PrimitiveTopology): return "PrimitiveTopology";
+        case(VkDynamicState::ViewportWithCount): return "ViewportWithCount";
+        case(VkDynamicState::ScissorWithCount): return "ScissorWithCount";
+        case(VkDynamicState::VertexInputBindingStride): return "VertexInputBindingStride";
+        case(VkDynamicState::DepthTestEnable): return "DepthTestEnable";
+        case(VkDynamicState::DepthWriteEnable): return "DepthWriteEnable";
+        case(VkDynamicState::DepthCompareOp): return "DepthCompareOp";
+        case(VkDynamicState::DepthBoundsTestEnable): return "DepthBoundsTestEnable";
+        case(VkDynamicState::StencilTestEnable): return "StencilTestEnable";
+        case(VkDynamicState::StencilOp): return "StencilOp";
+        case(VkDynamicState::RasterizerDiscardEnable): return "RasterizerDiscardEnable";
+        case(VkDynamicState::DepthBiasEnable): return "DepthBiasEnable";
+        case(VkDynamicState::PrimitiveRestartEnable): return "PrimitiveRestartEnable";
         default: return "UNKNOWN";
     }
 }
@@ -430,26 +430,6 @@ const char * to_string(VkFormat val) {
         case(VkFormat::Pvrtc14BppSrgbBlockIMG): return "Pvrtc14BppSrgbBlockIMG";
         case(VkFormat::Pvrtc22BppSrgbBlockIMG): return "Pvrtc22BppSrgbBlockIMG";
         case(VkFormat::Pvrtc24BppSrgbBlockIMG): return "Pvrtc24BppSrgbBlockIMG";
-        case(VkFormat::Astc4X4SfloatBlockEXT): return "Astc4X4SfloatBlockEXT";
-        case(VkFormat::Astc5X4SfloatBlockEXT): return "Astc5X4SfloatBlockEXT";
-        case(VkFormat::Astc5X5SfloatBlockEXT): return "Astc5X5SfloatBlockEXT";
-        case(VkFormat::Astc6X5SfloatBlockEXT): return "Astc6X5SfloatBlockEXT";
-        case(VkFormat::Astc6X6SfloatBlockEXT): return "Astc6X6SfloatBlockEXT";
-        case(VkFormat::Astc8X5SfloatBlockEXT): return "Astc8X5SfloatBlockEXT";
-        case(VkFormat::Astc8X6SfloatBlockEXT): return "Astc8X6SfloatBlockEXT";
-        case(VkFormat::Astc8X8SfloatBlockEXT): return "Astc8X8SfloatBlockEXT";
-        case(VkFormat::Astc10X5SfloatBlockEXT): return "Astc10X5SfloatBlockEXT";
-        case(VkFormat::Astc10X6SfloatBlockEXT): return "Astc10X6SfloatBlockEXT";
-        case(VkFormat::Astc10X8SfloatBlockEXT): return "Astc10X8SfloatBlockEXT";
-        case(VkFormat::Astc10X10SfloatBlockEXT): return "Astc10X10SfloatBlockEXT";
-        case(VkFormat::Astc12X10SfloatBlockEXT): return "Astc12X10SfloatBlockEXT";
-        case(VkFormat::Astc12X12SfloatBlockEXT): return "Astc12X12SfloatBlockEXT";
-        case(VkFormat::G8B8R82Plane444UnormEXT): return "G8B8R82Plane444UnormEXT";
-        case(VkFormat::G10X6B10X6R10X62Plane444Unorm3Pack16EXT): return "G10X6B10X6R10X62Plane444Unorm3Pack16EXT";
-        case(VkFormat::G12X4B12X4R12X42Plane444Unorm3Pack16EXT): return "G12X4B12X4R12X42Plane444Unorm3Pack16EXT";
-        case(VkFormat::G16B16R162Plane444UnormEXT): return "G16B16R162Plane444UnormEXT";
-        case(VkFormat::A4R4G4B4UnormPack16EXT): return "A4R4G4B4UnormPack16EXT";
-        case(VkFormat::A4B4G4R4UnormPack16EXT): return "A4B4G4R4UnormPack16EXT";
         case(VkFormat::G8B8G8R8422Unorm): return "G8B8G8R8422Unorm";
         case(VkFormat::B8G8R8G8422Unorm): return "B8G8R8G8422Unorm";
         case(VkFormat::G8B8R83Plane420Unorm): return "G8B8R83Plane420Unorm";
@@ -484,6 +464,26 @@ const char * to_string(VkFormat val) {
         case(VkFormat::G16B16R163Plane422Unorm): return "G16B16R163Plane422Unorm";
         case(VkFormat::G16B16R162Plane422Unorm): return "G16B16R162Plane422Unorm";
         case(VkFormat::G16B16R163Plane444Unorm): return "G16B16R163Plane444Unorm";
+        case(VkFormat::G8B8R82Plane444Unorm): return "G8B8R82Plane444Unorm";
+        case(VkFormat::G10X6B10X6R10X62Plane444Unorm3Pack16): return "G10X6B10X6R10X62Plane444Unorm3Pack16";
+        case(VkFormat::G12X4B12X4R12X42Plane444Unorm3Pack16): return "G12X4B12X4R12X42Plane444Unorm3Pack16";
+        case(VkFormat::G16B16R162Plane444Unorm): return "G16B16R162Plane444Unorm";
+        case(VkFormat::A4R4G4B4UnormPack16): return "A4R4G4B4UnormPack16";
+        case(VkFormat::A4B4G4R4UnormPack16): return "A4B4G4R4UnormPack16";
+        case(VkFormat::Astc4X4SfloatBlock): return "Astc4X4SfloatBlock";
+        case(VkFormat::Astc5X4SfloatBlock): return "Astc5X4SfloatBlock";
+        case(VkFormat::Astc5X5SfloatBlock): return "Astc5X5SfloatBlock";
+        case(VkFormat::Astc6X5SfloatBlock): return "Astc6X5SfloatBlock";
+        case(VkFormat::Astc6X6SfloatBlock): return "Astc6X6SfloatBlock";
+        case(VkFormat::Astc8X5SfloatBlock): return "Astc8X5SfloatBlock";
+        case(VkFormat::Astc8X6SfloatBlock): return "Astc8X6SfloatBlock";
+        case(VkFormat::Astc8X8SfloatBlock): return "Astc8X8SfloatBlock";
+        case(VkFormat::Astc10X5SfloatBlock): return "Astc10X5SfloatBlock";
+        case(VkFormat::Astc10X6SfloatBlock): return "Astc10X6SfloatBlock";
+        case(VkFormat::Astc10X8SfloatBlock): return "Astc10X8SfloatBlock";
+        case(VkFormat::Astc10X10SfloatBlock): return "Astc10X10SfloatBlock";
+        case(VkFormat::Astc12X10SfloatBlock): return "Astc12X10SfloatBlock";
+        case(VkFormat::Astc12X12SfloatBlock): return "Astc12X12SfloatBlock";
         default: return "UNKNOWN";
     }
 }
@@ -515,14 +515,14 @@ const char * to_string(VkImageLayout val) {
         case(VkImageLayout::VideoEncodeDstKHR): return "VideoEncodeDstKHR";
         case(VkImageLayout::VideoEncodeSrcKHR): return "VideoEncodeSrcKHR";
         case(VkImageLayout::VideoEncodeDpbKHR): return "VideoEncodeDpbKHR";
-        case(VkImageLayout::ReadOnlyOptimalKHR): return "ReadOnlyOptimalKHR";
-        case(VkImageLayout::AttachmentOptimalKHR): return "AttachmentOptimalKHR";
         case(VkImageLayout::DepthReadOnlyStencilAttachmentOptimal): return "DepthReadOnlyStencilAttachmentOptimal";
         case(VkImageLayout::DepthAttachmentStencilReadOnlyOptimal): return "DepthAttachmentStencilReadOnlyOptimal";
         case(VkImageLayout::DepthAttachmentOptimal): return "DepthAttachmentOptimal";
         case(VkImageLayout::DepthReadOnlyOptimal): return "DepthReadOnlyOptimal";
         case(VkImageLayout::StencilAttachmentOptimal): return "StencilAttachmentOptimal";
         case(VkImageLayout::StencilReadOnlyOptimal): return "StencilReadOnlyOptimal";
+        case(VkImageLayout::ReadOnlyOptimal): return "ReadOnlyOptimal";
+        case(VkImageLayout::AttachmentOptimal): return "AttachmentOptimal";
         default: return "UNKNOWN";
     }
 }
@@ -678,17 +678,17 @@ const char * to_string(VkResult val) {
         case(VkResult::ErrorValidationFailedEXT): return "ErrorValidationFailedEXT";
         case(VkResult::ErrorInvalidShaderNV): return "ErrorInvalidShaderNV";
         case(VkResult::ErrorInvalidDrmFormatModifierPlaneLayoutEXT): return "ErrorInvalidDrmFormatModifierPlaneLayoutEXT";
-        case(VkResult::ErrorNotPermittedEXT): return "ErrorNotPermittedEXT";
+        case(VkResult::ErrorNotPermittedKHR): return "ErrorNotPermittedKHR";
         case(VkResult::ErrorFullScreenExclusiveModeLostEXT): return "ErrorFullScreenExclusiveModeLostEXT";
         case(VkResult::ThreadIdleKHR): return "ThreadIdleKHR";
         case(VkResult::ThreadDoneKHR): return "ThreadDoneKHR";
         case(VkResult::OperationDeferredKHR): return "OperationDeferredKHR";
         case(VkResult::OperationNotDeferredKHR): return "OperationNotDeferredKHR";
-        case(VkResult::PipelineCompileRequiredEXT): return "PipelineCompileRequiredEXT";
         case(VkResult::ErrorOutOfPoolMemory): return "ErrorOutOfPoolMemory";
         case(VkResult::ErrorInvalidExternalHandle): return "ErrorInvalidExternalHandle";
         case(VkResult::ErrorFragmentation): return "ErrorFragmentation";
         case(VkResult::ErrorInvalidOpaqueCaptureAddress): return "ErrorInvalidOpaqueCaptureAddress";
+        case(VkResult::PipelineCompileRequired): return "PipelineCompileRequired";
         default: return "UNKNOWN";
     }
 }
@@ -793,6 +793,7 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::VideoProfilesKHR): return "VideoProfilesKHR";
         case(VkStructureType::PhysicalDeviceVideoFormatInfoKHR): return "PhysicalDeviceVideoFormatInfoKHR";
         case(VkStructureType::VideoFormatPropertiesKHR): return "VideoFormatPropertiesKHR";
+        case(VkStructureType::QueueFamilyQueryResultStatusProperties2KHR): return "QueueFamilyQueryResultStatusProperties2KHR";
         case(VkStructureType::VideoDecodeInfoKHR): return "VideoDecodeInfoKHR";
         case(VkStructureType::DedicatedAllocationImageCreateInfoNV): return "DedicatedAllocationImageCreateInfoNV";
         case(VkStructureType::DedicatedAllocationBufferCreateInfoNV): return "DedicatedAllocationBufferCreateInfoNV";
@@ -814,6 +815,20 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::VideoEncodeH264NaluSliceEXT): return "VideoEncodeH264NaluSliceEXT";
         case(VkStructureType::VideoEncodeH264EmitPictureParametersEXT): return "VideoEncodeH264EmitPictureParametersEXT";
         case(VkStructureType::VideoEncodeH264ProfileEXT): return "VideoEncodeH264ProfileEXT";
+        case(VkStructureType::VideoEncodeH264RateControlInfoEXT): return "VideoEncodeH264RateControlInfoEXT";
+        case(VkStructureType::VideoEncodeH264RateControlLayerInfoEXT): return "VideoEncodeH264RateControlLayerInfoEXT";
+        case(VkStructureType::VideoEncodeH265CapabilitiesEXT): return "VideoEncodeH265CapabilitiesEXT";
+        case(VkStructureType::VideoEncodeH265SessionCreateInfoEXT): return "VideoEncodeH265SessionCreateInfoEXT";
+        case(VkStructureType::VideoEncodeH265SessionParametersCreateInfoEXT): return "VideoEncodeH265SessionParametersCreateInfoEXT";
+        case(VkStructureType::VideoEncodeH265SessionParametersAddInfoEXT): return "VideoEncodeH265SessionParametersAddInfoEXT";
+        case(VkStructureType::VideoEncodeH265VclFrameInfoEXT): return "VideoEncodeH265VclFrameInfoEXT";
+        case(VkStructureType::VideoEncodeH265DpbSlotInfoEXT): return "VideoEncodeH265DpbSlotInfoEXT";
+        case(VkStructureType::VideoEncodeH265NaluSliceEXT): return "VideoEncodeH265NaluSliceEXT";
+        case(VkStructureType::VideoEncodeH265EmitPictureParametersEXT): return "VideoEncodeH265EmitPictureParametersEXT";
+        case(VkStructureType::VideoEncodeH265ProfileEXT): return "VideoEncodeH265ProfileEXT";
+        case(VkStructureType::VideoEncodeH265ReferenceListsEXT): return "VideoEncodeH265ReferenceListsEXT";
+        case(VkStructureType::VideoEncodeH265RateControlInfoEXT): return "VideoEncodeH265RateControlInfoEXT";
+        case(VkStructureType::VideoEncodeH265RateControlLayerInfoEXT): return "VideoEncodeH265RateControlLayerInfoEXT";
         case(VkStructureType::VideoDecodeH264CapabilitiesEXT): return "VideoDecodeH264CapabilitiesEXT";
         case(VkStructureType::VideoDecodeH264SessionCreateInfoEXT): return "VideoDecodeH264SessionCreateInfoEXT";
         case(VkStructureType::VideoDecodeH264PictureInfoEXT): return "VideoDecodeH264PictureInfoEXT";
@@ -823,6 +838,10 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::VideoDecodeH264SessionParametersAddInfoEXT): return "VideoDecodeH264SessionParametersAddInfoEXT";
         case(VkStructureType::VideoDecodeH264DpbSlotInfoEXT): return "VideoDecodeH264DpbSlotInfoEXT";
         case(VkStructureType::TextureLodGatherFormatPropertiesAMD): return "TextureLodGatherFormatPropertiesAMD";
+        case(VkStructureType::RenderingFragmentShadingRateAttachmentInfoKHR): return "RenderingFragmentShadingRateAttachmentInfoKHR";
+        case(VkStructureType::RenderingFragmentDensityMapAttachmentInfoEXT): return "RenderingFragmentDensityMapAttachmentInfoEXT";
+        case(VkStructureType::AttachmentSampleCountInfoAMD): return "AttachmentSampleCountInfoAMD";
+        case(VkStructureType::MultiviewPerViewAttributesInfoNVX): return "MultiviewPerViewAttributesInfoNVX";
         case(VkStructureType::StreamDescriptorSurfaceCreateInfoGGP): return "StreamDescriptorSurfaceCreateInfoGGP";
         case(VkStructureType::PhysicalDeviceCornerSampledImageFeaturesNV): return "PhysicalDeviceCornerSampledImageFeaturesNV";
         case(VkStructureType::ExternalMemoryImageCreateInfoNV): return "ExternalMemoryImageCreateInfoNV";
@@ -832,7 +851,6 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::Win32KeyedMutexAcquireReleaseInfoNV): return "Win32KeyedMutexAcquireReleaseInfoNV";
         case(VkStructureType::ValidationFlagsEXT): return "ValidationFlagsEXT";
         case(VkStructureType::ViSurfaceCreateInfoNN): return "ViSurfaceCreateInfoNN";
-        case(VkStructureType::PhysicalDeviceTextureCompressionAstcHdrFeaturesEXT): return "PhysicalDeviceTextureCompressionAstcHdrFeaturesEXT";
         case(VkStructureType::ImageViewAstcDecodeModeEXT): return "ImageViewAstcDecodeModeEXT";
         case(VkStructureType::PhysicalDeviceAstcDecodeFeaturesEXT): return "PhysicalDeviceAstcDecodeFeaturesEXT";
         case(VkStructureType::ImportMemoryWin32HandleInfoKHR): return "ImportMemoryWin32HandleInfoKHR";
@@ -904,10 +922,7 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::ImportAndroidHardwareBufferInfoANDROID): return "ImportAndroidHardwareBufferInfoANDROID";
         case(VkStructureType::MemoryGetAndroidHardwareBufferInfoANDROID): return "MemoryGetAndroidHardwareBufferInfoANDROID";
         case(VkStructureType::ExternalFormatANDROID): return "ExternalFormatANDROID";
-        case(VkStructureType::PhysicalDeviceInlineUniformBlockFeaturesEXT): return "PhysicalDeviceInlineUniformBlockFeaturesEXT";
-        case(VkStructureType::PhysicalDeviceInlineUniformBlockPropertiesEXT): return "PhysicalDeviceInlineUniformBlockPropertiesEXT";
-        case(VkStructureType::WriteDescriptorSetInlineUniformBlockEXT): return "WriteDescriptorSetInlineUniformBlockEXT";
-        case(VkStructureType::DescriptorPoolInlineUniformBlockCreateInfoEXT): return "DescriptorPoolInlineUniformBlockCreateInfoEXT";
+        case(VkStructureType::AndroidHardwareBufferFormatProperties2ANDROID): return "AndroidHardwareBufferFormatProperties2ANDROID";
         case(VkStructureType::SampleLocationsInfoEXT): return "SampleLocationsInfoEXT";
         case(VkStructureType::RenderPassSampleLocationsBeginInfoEXT): return "RenderPassSampleLocationsBeginInfoEXT";
         case(VkStructureType::PipelineSampleLocationsStateCreateInfoEXT): return "PipelineSampleLocationsStateCreateInfoEXT";
@@ -946,6 +961,7 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::ImageDrmFormatModifierListCreateInfoEXT): return "ImageDrmFormatModifierListCreateInfoEXT";
         case(VkStructureType::ImageDrmFormatModifierExplicitCreateInfoEXT): return "ImageDrmFormatModifierExplicitCreateInfoEXT";
         case(VkStructureType::ImageDrmFormatModifierPropertiesEXT): return "ImageDrmFormatModifierPropertiesEXT";
+        case(VkStructureType::DrmFormatModifierPropertiesList2EXT): return "DrmFormatModifierPropertiesList2EXT";
         case(VkStructureType::ValidationCacheCreateInfoEXT): return "ValidationCacheCreateInfoEXT";
         case(VkStructureType::ShaderModuleValidationCacheCreateInfoEXT): return "ShaderModuleValidationCacheCreateInfoEXT";
         case(VkStructureType::PhysicalDevicePortabilitySubsetFeaturesKHR): return "PhysicalDevicePortabilitySubsetFeaturesKHR";
@@ -969,7 +985,6 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PipelineRepresentativeFragmentTestStateCreateInfoNV): return "PipelineRepresentativeFragmentTestStateCreateInfoNV";
         case(VkStructureType::PhysicalDeviceImageViewImageFormatInfoEXT): return "PhysicalDeviceImageViewImageFormatInfoEXT";
         case(VkStructureType::FilterCubicImageViewImageFormatPropertiesEXT): return "FilterCubicImageViewImageFormatPropertiesEXT";
-        case(VkStructureType::DeviceQueueGlobalPriorityCreateInfoEXT): return "DeviceQueueGlobalPriorityCreateInfoEXT";
         case(VkStructureType::ImportMemoryHostPointerInfoEXT): return "ImportMemoryHostPointerInfoEXT";
         case(VkStructureType::MemoryHostPointerPropertiesEXT): return "MemoryHostPointerPropertiesEXT";
         case(VkStructureType::PhysicalDeviceExternalMemoryHostPropertiesEXT): return "PhysicalDeviceExternalMemoryHostPropertiesEXT";
@@ -984,12 +999,14 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::VideoDecodeH265ProfileEXT): return "VideoDecodeH265ProfileEXT";
         case(VkStructureType::VideoDecodeH265PictureInfoEXT): return "VideoDecodeH265PictureInfoEXT";
         case(VkStructureType::VideoDecodeH265DpbSlotInfoEXT): return "VideoDecodeH265DpbSlotInfoEXT";
+        case(VkStructureType::DeviceQueueGlobalPriorityCreateInfoKHR): return "DeviceQueueGlobalPriorityCreateInfoKHR";
+        case(VkStructureType::PhysicalDeviceGlobalPriorityQueryFeaturesKHR): return "PhysicalDeviceGlobalPriorityQueryFeaturesKHR";
+        case(VkStructureType::QueueFamilyGlobalPriorityPropertiesKHR): return "QueueFamilyGlobalPriorityPropertiesKHR";
         case(VkStructureType::DeviceMemoryOverallocationCreateInfoAMD): return "DeviceMemoryOverallocationCreateInfoAMD";
         case(VkStructureType::PhysicalDeviceVertexAttributeDivisorPropertiesEXT): return "PhysicalDeviceVertexAttributeDivisorPropertiesEXT";
         case(VkStructureType::PipelineVertexInputDivisorStateCreateInfoEXT): return "PipelineVertexInputDivisorStateCreateInfoEXT";
         case(VkStructureType::PhysicalDeviceVertexAttributeDivisorFeaturesEXT): return "PhysicalDeviceVertexAttributeDivisorFeaturesEXT";
         case(VkStructureType::PresentFrameTokenGGP): return "PresentFrameTokenGGP";
-        case(VkStructureType::PipelineCreationFeedbackCreateInfoEXT): return "PipelineCreationFeedbackCreateInfoEXT";
         case(VkStructureType::PhysicalDeviceComputeShaderDerivativesFeaturesNV): return "PhysicalDeviceComputeShaderDerivativesFeaturesNV";
         case(VkStructureType::PhysicalDeviceMeshShaderFeaturesNV): return "PhysicalDeviceMeshShaderFeaturesNV";
         case(VkStructureType::PhysicalDeviceMeshShaderPropertiesNV): return "PhysicalDeviceMeshShaderPropertiesNV";
@@ -1010,14 +1027,10 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::DisplayNativeHdrSurfaceCapabilitiesAMD): return "DisplayNativeHdrSurfaceCapabilitiesAMD";
         case(VkStructureType::SwapchainDisplayNativeHdrCreateInfoAMD): return "SwapchainDisplayNativeHdrCreateInfoAMD";
         case(VkStructureType::ImagepipeSurfaceCreateInfoFUCHSIA): return "ImagepipeSurfaceCreateInfoFUCHSIA";
-        case(VkStructureType::PhysicalDeviceShaderTerminateInvocationFeaturesKHR): return "PhysicalDeviceShaderTerminateInvocationFeaturesKHR";
         case(VkStructureType::MetalSurfaceCreateInfoEXT): return "MetalSurfaceCreateInfoEXT";
         case(VkStructureType::PhysicalDeviceFragmentDensityMapFeaturesEXT): return "PhysicalDeviceFragmentDensityMapFeaturesEXT";
         case(VkStructureType::PhysicalDeviceFragmentDensityMapPropertiesEXT): return "PhysicalDeviceFragmentDensityMapPropertiesEXT";
         case(VkStructureType::RenderPassFragmentDensityMapCreateInfoEXT): return "RenderPassFragmentDensityMapCreateInfoEXT";
-        case(VkStructureType::PhysicalDeviceSubgroupSizeControlPropertiesEXT): return "PhysicalDeviceSubgroupSizeControlPropertiesEXT";
-        case(VkStructureType::PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT): return "PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT";
-        case(VkStructureType::PhysicalDeviceSubgroupSizeControlFeaturesEXT): return "PhysicalDeviceSubgroupSizeControlFeaturesEXT";
         case(VkStructureType::FragmentShadingRateAttachmentInfoKHR): return "FragmentShadingRateAttachmentInfoKHR";
         case(VkStructureType::PipelineFragmentShadingRateStateCreateInfoKHR): return "PipelineFragmentShadingRateStateCreateInfoKHR";
         case(VkStructureType::PhysicalDeviceFragmentShadingRatePropertiesKHR): return "PhysicalDeviceFragmentShadingRatePropertiesKHR";
@@ -1033,7 +1046,6 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV): return "PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV";
         case(VkStructureType::PhysicalDeviceBufferDeviceAddressFeaturesEXT): return "PhysicalDeviceBufferDeviceAddressFeaturesEXT";
         case(VkStructureType::BufferDeviceAddressCreateInfoEXT): return "BufferDeviceAddressCreateInfoEXT";
-        case(VkStructureType::PhysicalDeviceToolPropertiesEXT): return "PhysicalDeviceToolPropertiesEXT";
         case(VkStructureType::ValidationFeaturesEXT): return "ValidationFeaturesEXT";
         case(VkStructureType::PhysicalDevicePresentWaitFeaturesKHR): return "PhysicalDevicePresentWaitFeaturesKHR";
         case(VkStructureType::PhysicalDeviceCooperativeMatrixFeaturesNV): return "PhysicalDeviceCooperativeMatrixFeaturesNV";
@@ -1064,7 +1076,6 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PipelineExecutableStatisticKHR): return "PipelineExecutableStatisticKHR";
         case(VkStructureType::PipelineExecutableInternalRepresentationKHR): return "PipelineExecutableInternalRepresentationKHR";
         case(VkStructureType::PhysicalDeviceShaderAtomicFloat2FeaturesEXT): return "PhysicalDeviceShaderAtomicFloat2FeaturesEXT";
-        case(VkStructureType::PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT): return "PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT";
         case(VkStructureType::PhysicalDeviceDeviceGeneratedCommandsPropertiesNV): return "PhysicalDeviceDeviceGeneratedCommandsPropertiesNV";
         case(VkStructureType::GraphicsShaderGroupCreateInfoNV): return "GraphicsShaderGroupCreateInfoNV";
         case(VkStructureType::GraphicsPipelineShaderGroupsCreateInfoNV): return "GraphicsPipelineShaderGroupsCreateInfoNV";
@@ -1075,10 +1086,7 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PhysicalDeviceDeviceGeneratedCommandsFeaturesNV): return "PhysicalDeviceDeviceGeneratedCommandsFeaturesNV";
         case(VkStructureType::PhysicalDeviceInheritedViewportScissorFeaturesNV): return "PhysicalDeviceInheritedViewportScissorFeaturesNV";
         case(VkStructureType::CommandBufferInheritanceViewportScissorInfoNV): return "CommandBufferInheritanceViewportScissorInfoNV";
-        case(VkStructureType::PhysicalDeviceShaderIntegerDotProductFeaturesKHR): return "PhysicalDeviceShaderIntegerDotProductFeaturesKHR";
-        case(VkStructureType::PhysicalDeviceShaderIntegerDotProductPropertiesKHR): return "PhysicalDeviceShaderIntegerDotProductPropertiesKHR";
         case(VkStructureType::PhysicalDeviceTexelBufferAlignmentFeaturesEXT): return "PhysicalDeviceTexelBufferAlignmentFeaturesEXT";
-        case(VkStructureType::PhysicalDeviceTexelBufferAlignmentPropertiesEXT): return "PhysicalDeviceTexelBufferAlignmentPropertiesEXT";
         case(VkStructureType::CommandBufferInheritanceRenderPassTransformInfoQCOM): return "CommandBufferInheritanceRenderPassTransformInfoQCOM";
         case(VkStructureType::RenderPassTransformBeginInfoQCOM): return "RenderPassTransformBeginInfoQCOM";
         case(VkStructureType::PhysicalDeviceDeviceMemoryReportFeaturesEXT): return "PhysicalDeviceDeviceMemoryReportFeaturesEXT";
@@ -1092,26 +1100,14 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PipelineLibraryCreateInfoKHR): return "PipelineLibraryCreateInfoKHR";
         case(VkStructureType::PresentIdKHR): return "PresentIdKHR";
         case(VkStructureType::PhysicalDevicePresentIdFeaturesKHR): return "PhysicalDevicePresentIdFeaturesKHR";
-        case(VkStructureType::PhysicalDevicePrivateDataFeaturesEXT): return "PhysicalDevicePrivateDataFeaturesEXT";
-        case(VkStructureType::DevicePrivateDataCreateInfoEXT): return "DevicePrivateDataCreateInfoEXT";
-        case(VkStructureType::PrivateDataSlotCreateInfoEXT): return "PrivateDataSlotCreateInfoEXT";
-        case(VkStructureType::PhysicalDevicePipelineCreationCacheControlFeaturesEXT): return "PhysicalDevicePipelineCreationCacheControlFeaturesEXT";
         case(VkStructureType::VideoEncodeInfoKHR): return "VideoEncodeInfoKHR";
         case(VkStructureType::VideoEncodeRateControlInfoKHR): return "VideoEncodeRateControlInfoKHR";
+        case(VkStructureType::VideoEncodeRateControlLayerInfoKHR): return "VideoEncodeRateControlLayerInfoKHR";
         case(VkStructureType::PhysicalDeviceDiagnosticsConfigFeaturesNV): return "PhysicalDeviceDiagnosticsConfigFeaturesNV";
         case(VkStructureType::DeviceDiagnosticsConfigCreateInfoNV): return "DeviceDiagnosticsConfigCreateInfoNV";
-        case(VkStructureType::MemoryBarrier2KHR): return "MemoryBarrier2KHR";
-        case(VkStructureType::BufferMemoryBarrier2KHR): return "BufferMemoryBarrier2KHR";
-        case(VkStructureType::ImageMemoryBarrier2KHR): return "ImageMemoryBarrier2KHR";
-        case(VkStructureType::DependencyInfoKHR): return "DependencyInfoKHR";
-        case(VkStructureType::SubmitInfo2KHR): return "SubmitInfo2KHR";
-        case(VkStructureType::SemaphoreSubmitInfoKHR): return "SemaphoreSubmitInfoKHR";
-        case(VkStructureType::CommandBufferSubmitInfoKHR): return "CommandBufferSubmitInfoKHR";
-        case(VkStructureType::PhysicalDeviceSynchronization2FeaturesKHR): return "PhysicalDeviceSynchronization2FeaturesKHR";
         case(VkStructureType::QueueFamilyCheckpointProperties2NV): return "QueueFamilyCheckpointProperties2NV";
         case(VkStructureType::CheckpointData2NV): return "CheckpointData2NV";
         case(VkStructureType::PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR): return "PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR";
-        case(VkStructureType::PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR): return "PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR";
         case(VkStructureType::PhysicalDeviceFragmentShadingRateEnumsPropertiesNV): return "PhysicalDeviceFragmentShadingRateEnumsPropertiesNV";
         case(VkStructureType::PhysicalDeviceFragmentShadingRateEnumsFeaturesNV): return "PhysicalDeviceFragmentShadingRateEnumsFeaturesNV";
         case(VkStructureType::PipelineFragmentShadingRateEnumStateCreateInfoNV): return "PipelineFragmentShadingRateEnumStateCreateInfoNV";
@@ -1122,20 +1118,10 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::PhysicalDeviceFragmentDensityMap2FeaturesEXT): return "PhysicalDeviceFragmentDensityMap2FeaturesEXT";
         case(VkStructureType::PhysicalDeviceFragmentDensityMap2PropertiesEXT): return "PhysicalDeviceFragmentDensityMap2PropertiesEXT";
         case(VkStructureType::CopyCommandTransformInfoQCOM): return "CopyCommandTransformInfoQCOM";
-        case(VkStructureType::PhysicalDeviceImageRobustnessFeaturesEXT): return "PhysicalDeviceImageRobustnessFeaturesEXT";
         case(VkStructureType::PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR): return "PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR";
-        case(VkStructureType::CopyBufferInfo2KHR): return "CopyBufferInfo2KHR";
-        case(VkStructureType::CopyImageInfo2KHR): return "CopyImageInfo2KHR";
-        case(VkStructureType::CopyBufferToImageInfo2KHR): return "CopyBufferToImageInfo2KHR";
-        case(VkStructureType::CopyImageToBufferInfo2KHR): return "CopyImageToBufferInfo2KHR";
-        case(VkStructureType::BlitImageInfo2KHR): return "BlitImageInfo2KHR";
-        case(VkStructureType::ResolveImageInfo2KHR): return "ResolveImageInfo2KHR";
-        case(VkStructureType::BufferCopy2KHR): return "BufferCopy2KHR";
-        case(VkStructureType::ImageCopy2KHR): return "ImageCopy2KHR";
-        case(VkStructureType::ImageBlit2KHR): return "ImageBlit2KHR";
-        case(VkStructureType::BufferImageCopy2KHR): return "BufferImageCopy2KHR";
-        case(VkStructureType::ImageResolve2KHR): return "ImageResolve2KHR";
         case(VkStructureType::PhysicalDevice4444FormatsFeaturesEXT): return "PhysicalDevice4444FormatsFeaturesEXT";
+        case(VkStructureType::PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM): return "PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM";
+        case(VkStructureType::PhysicalDeviceRgba10X6FormatsFeaturesEXT): return "PhysicalDeviceRgba10X6FormatsFeaturesEXT";
         case(VkStructureType::DirectfbSurfaceCreateInfoEXT): return "DirectfbSurfaceCreateInfoEXT";
         case(VkStructureType::PhysicalDeviceMutableDescriptorTypeFeaturesVALVE): return "PhysicalDeviceMutableDescriptorTypeFeaturesVALVE";
         case(VkStructureType::MutableDescriptorTypeCreateInfoVALVE): return "MutableDescriptorTypeCreateInfoVALVE";
@@ -1143,6 +1129,8 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::VertexInputBindingDescription2EXT): return "VertexInputBindingDescription2EXT";
         case(VkStructureType::VertexInputAttributeDescription2EXT): return "VertexInputAttributeDescription2EXT";
         case(VkStructureType::PhysicalDeviceDrmPropertiesEXT): return "PhysicalDeviceDrmPropertiesEXT";
+        case(VkStructureType::PhysicalDeviceDepthClipControlFeaturesEXT): return "PhysicalDeviceDepthClipControlFeaturesEXT";
+        case(VkStructureType::PipelineViewportDepthClipControlCreateInfoEXT): return "PipelineViewportDepthClipControlCreateInfoEXT";
         case(VkStructureType::PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT): return "PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT";
         case(VkStructureType::ImportMemoryZirconHandleInfoFUCHSIA): return "ImportMemoryZirconHandleInfoFUCHSIA";
         case(VkStructureType::MemoryZirconHandlePropertiesFUCHSIA): return "MemoryZirconHandlePropertiesFUCHSIA";
@@ -1169,11 +1157,17 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::ScreenSurfaceCreateInfoQNX): return "ScreenSurfaceCreateInfoQNX";
         case(VkStructureType::PhysicalDeviceColorWriteEnableFeaturesEXT): return "PhysicalDeviceColorWriteEnableFeaturesEXT";
         case(VkStructureType::PipelineColorWriteCreateInfoEXT): return "PipelineColorWriteCreateInfoEXT";
-        case(VkStructureType::PhysicalDeviceGlobalPriorityQueryFeaturesEXT): return "PhysicalDeviceGlobalPriorityQueryFeaturesEXT";
-        case(VkStructureType::QueueFamilyGlobalPriorityPropertiesEXT): return "QueueFamilyGlobalPriorityPropertiesEXT";
+        case(VkStructureType::PhysicalDeviceImageViewMinLodFeaturesEXT): return "PhysicalDeviceImageViewMinLodFeaturesEXT";
+        case(VkStructureType::ImageViewMinLodCreateInfoEXT): return "ImageViewMinLodCreateInfoEXT";
         case(VkStructureType::PhysicalDeviceMultiDrawFeaturesEXT): return "PhysicalDeviceMultiDrawFeaturesEXT";
         case(VkStructureType::PhysicalDeviceMultiDrawPropertiesEXT): return "PhysicalDeviceMultiDrawPropertiesEXT";
+        case(VkStructureType::PhysicalDeviceBorderColorSwizzleFeaturesEXT): return "PhysicalDeviceBorderColorSwizzleFeaturesEXT";
+        case(VkStructureType::SamplerBorderColorComponentMappingCreateInfoEXT): return "SamplerBorderColorComponentMappingCreateInfoEXT";
         case(VkStructureType::PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT): return "PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT";
+        case(VkStructureType::PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM): return "PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM";
+        case(VkStructureType::PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM): return "PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM";
+        case(VkStructureType::SubpassFragmentDensityMapOffsetEndInfoQCOM): return "SubpassFragmentDensityMapOffsetEndInfoQCOM";
+        case(VkStructureType::PhysicalDeviceLinearColorAttachmentFeaturesNV): return "PhysicalDeviceLinearColorAttachmentFeaturesNV";
         case(VkStructureType::PhysicalDeviceSubgroupProperties): return "PhysicalDeviceSubgroupProperties";
         case(VkStructureType::BindBufferMemoryInfo): return "BindBufferMemoryInfo";
         case(VkStructureType::BindImageMemoryInfo): return "BindImageMemoryInfo";
@@ -1289,6 +1283,58 @@ const char * to_string(VkStructureType val) {
         case(VkStructureType::BufferOpaqueCaptureAddressCreateInfo): return "BufferOpaqueCaptureAddressCreateInfo";
         case(VkStructureType::MemoryOpaqueCaptureAddressAllocateInfo): return "MemoryOpaqueCaptureAddressAllocateInfo";
         case(VkStructureType::DeviceMemoryOpaqueCaptureAddressInfo): return "DeviceMemoryOpaqueCaptureAddressInfo";
+        case(VkStructureType::PhysicalDeviceVulkan13Features): return "PhysicalDeviceVulkan13Features";
+        case(VkStructureType::PhysicalDeviceVulkan13Properties): return "PhysicalDeviceVulkan13Properties";
+        case(VkStructureType::PipelineCreationFeedbackCreateInfo): return "PipelineCreationFeedbackCreateInfo";
+        case(VkStructureType::PhysicalDeviceShaderTerminateInvocationFeatures): return "PhysicalDeviceShaderTerminateInvocationFeatures";
+        case(VkStructureType::PhysicalDeviceToolProperties): return "PhysicalDeviceToolProperties";
+        case(VkStructureType::PhysicalDeviceShaderDemoteToHelperInvocationFeatures): return "PhysicalDeviceShaderDemoteToHelperInvocationFeatures";
+        case(VkStructureType::PhysicalDevicePrivateDataFeatures): return "PhysicalDevicePrivateDataFeatures";
+        case(VkStructureType::DevicePrivateDataCreateInfo): return "DevicePrivateDataCreateInfo";
+        case(VkStructureType::PrivateDataSlotCreateInfo): return "PrivateDataSlotCreateInfo";
+        case(VkStructureType::PhysicalDevicePipelineCreationCacheControlFeatures): return "PhysicalDevicePipelineCreationCacheControlFeatures";
+        case(VkStructureType::MemoryBarrier2): return "MemoryBarrier2";
+        case(VkStructureType::BufferMemoryBarrier2): return "BufferMemoryBarrier2";
+        case(VkStructureType::ImageMemoryBarrier2): return "ImageMemoryBarrier2";
+        case(VkStructureType::DependencyInfo): return "DependencyInfo";
+        case(VkStructureType::SubmitInfo2): return "SubmitInfo2";
+        case(VkStructureType::SemaphoreSubmitInfo): return "SemaphoreSubmitInfo";
+        case(VkStructureType::CommandBufferSubmitInfo): return "CommandBufferSubmitInfo";
+        case(VkStructureType::PhysicalDeviceSynchronization2Features): return "PhysicalDeviceSynchronization2Features";
+        case(VkStructureType::PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures): return "PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures";
+        case(VkStructureType::PhysicalDeviceImageRobustnessFeatures): return "PhysicalDeviceImageRobustnessFeatures";
+        case(VkStructureType::CopyBufferInfo2): return "CopyBufferInfo2";
+        case(VkStructureType::CopyImageInfo2): return "CopyImageInfo2";
+        case(VkStructureType::CopyBufferToImageInfo2): return "CopyBufferToImageInfo2";
+        case(VkStructureType::CopyImageToBufferInfo2): return "CopyImageToBufferInfo2";
+        case(VkStructureType::BlitImageInfo2): return "BlitImageInfo2";
+        case(VkStructureType::ResolveImageInfo2): return "ResolveImageInfo2";
+        case(VkStructureType::BufferCopy2): return "BufferCopy2";
+        case(VkStructureType::ImageCopy2): return "ImageCopy2";
+        case(VkStructureType::ImageBlit2): return "ImageBlit2";
+        case(VkStructureType::BufferImageCopy2): return "BufferImageCopy2";
+        case(VkStructureType::ImageResolve2): return "ImageResolve2";
+        case(VkStructureType::PhysicalDeviceSubgroupSizeControlProperties): return "PhysicalDeviceSubgroupSizeControlProperties";
+        case(VkStructureType::PipelineShaderStageRequiredSubgroupSizeCreateInfo): return "PipelineShaderStageRequiredSubgroupSizeCreateInfo";
+        case(VkStructureType::PhysicalDeviceSubgroupSizeControlFeatures): return "PhysicalDeviceSubgroupSizeControlFeatures";
+        case(VkStructureType::PhysicalDeviceInlineUniformBlockFeatures): return "PhysicalDeviceInlineUniformBlockFeatures";
+        case(VkStructureType::PhysicalDeviceInlineUniformBlockProperties): return "PhysicalDeviceInlineUniformBlockProperties";
+        case(VkStructureType::WriteDescriptorSetInlineUniformBlock): return "WriteDescriptorSetInlineUniformBlock";
+        case(VkStructureType::DescriptorPoolInlineUniformBlockCreateInfo): return "DescriptorPoolInlineUniformBlockCreateInfo";
+        case(VkStructureType::PhysicalDeviceTextureCompressionAstcHdrFeatures): return "PhysicalDeviceTextureCompressionAstcHdrFeatures";
+        case(VkStructureType::RenderingInfo): return "RenderingInfo";
+        case(VkStructureType::RenderingAttachmentInfo): return "RenderingAttachmentInfo";
+        case(VkStructureType::PipelineRenderingCreateInfo): return "PipelineRenderingCreateInfo";
+        case(VkStructureType::PhysicalDeviceDynamicRenderingFeatures): return "PhysicalDeviceDynamicRenderingFeatures";
+        case(VkStructureType::CommandBufferInheritanceRenderingInfo): return "CommandBufferInheritanceRenderingInfo";
+        case(VkStructureType::PhysicalDeviceShaderIntegerDotProductFeatures): return "PhysicalDeviceShaderIntegerDotProductFeatures";
+        case(VkStructureType::PhysicalDeviceShaderIntegerDotProductProperties): return "PhysicalDeviceShaderIntegerDotProductProperties";
+        case(VkStructureType::PhysicalDeviceTexelBufferAlignmentProperties): return "PhysicalDeviceTexelBufferAlignmentProperties";
+        case(VkStructureType::FormatProperties3): return "FormatProperties3";
+        case(VkStructureType::PhysicalDeviceMaintenance4Features): return "PhysicalDeviceMaintenance4Features";
+        case(VkStructureType::PhysicalDeviceMaintenance4Properties): return "PhysicalDeviceMaintenance4Properties";
+        case(VkStructureType::DeviceBufferMemoryRequirements): return "DeviceBufferMemoryRequirements";
+        case(VkStructureType::DeviceImageMemoryRequirements): return "DeviceImageMemoryRequirements";
         default: return "UNKNOWN";
     }
 }
@@ -1384,10 +1430,10 @@ const char * to_string(VkObjectType val) {
         case(VkObjectType::PerformanceConfigurationINTEL): return "PerformanceConfigurationINTEL";
         case(VkObjectType::DeferredOperationKHR): return "DeferredOperationKHR";
         case(VkObjectType::IndirectCommandsLayoutNV): return "IndirectCommandsLayoutNV";
-        case(VkObjectType::PrivateDataSlotEXT): return "PrivateDataSlotEXT";
         case(VkObjectType::BufferCollectionFUCHSIA): return "BufferCollectionFUCHSIA";
         case(VkObjectType::SamplerYcbcrConversion): return "SamplerYcbcrConversion";
         case(VkObjectType::DescriptorUpdateTemplate): return "DescriptorUpdateTemplate";
+        case(VkObjectType::PrivateDataSlot): return "PrivateDataSlot";
         default: return "UNKNOWN";
     }
 }
@@ -1468,12 +1514,12 @@ const char * to_string(VkShaderInfoTypeAMD val) {
         default: return "UNKNOWN";
     }
 }
-const char * to_string(VkQueueGlobalPriorityEXT val) {
+const char * to_string(VkQueueGlobalPriorityKHR val) {
     switch(val) {
-        case(VkQueueGlobalPriorityEXT::LowEXT): return "LowEXT";
-        case(VkQueueGlobalPriorityEXT::MediumEXT): return "MediumEXT";
-        case(VkQueueGlobalPriorityEXT::HighEXT): return "HighEXT";
-        case(VkQueueGlobalPriorityEXT::RealtimeEXT): return "RealtimeEXT";
+        case(VkQueueGlobalPriorityKHR::LowKHR): return "LowKHR";
+        case(VkQueueGlobalPriorityKHR::MediumKHR): return "MediumKHR";
+        case(VkQueueGlobalPriorityKHR::HighKHR): return "HighKHR";
+        case(VkQueueGlobalPriorityKHR::RealtimeKHR): return "RealtimeKHR";
         default: return "UNKNOWN";
     }
 }
@@ -1969,6 +2015,8 @@ const char * to_string(VkDriverId val) {
         case(VkDriverId::MesaTurnip): return "MesaTurnip";
         case(VkDriverId::MesaV3Dv): return "MesaV3Dv";
         case(VkDriverId::MesaPanvk): return "MesaPanvk";
+        case(VkDriverId::SamsungProprietary): return "SamsungProprietary";
+        case(VkDriverId::MesaVenus): return "MesaVenus";
         default: return "UNKNOWN";
     }
 }
@@ -2027,14 +2075,14 @@ const char * to_string(VkAccelerationStructureMotionInstanceTypeNV val) {
 }
 const char * to_string(VkPipelineCacheCreateFlagBits val) {
     switch(val) {
-        case(VkPipelineCacheCreateFlagBits::ExternallySynchronizedBitEXT): return "ExternallySynchronizedBitEXT";
+        case(VkPipelineCacheCreateFlagBits::ExternallySynchronized): return "ExternallySynchronized";
         default: return "UNKNOWN";
     }
 }
 std::string to_string(VkPipelineCacheCreateFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkPipelineCacheCreateFlagBits::ExternallySynchronizedBitEXT) out += "ExternallySynchronizedBitEXT | ";
+    if (flag & VkPipelineCacheCreateFlagBits::ExternallySynchronized) out += "ExternallySynchronized | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkQueueFlagBits val) {
@@ -2173,7 +2221,7 @@ const char * to_string(VkAccessFlagBits val) {
         case(VkAccessFlagBits::FragmentShadingRateAttachmentReadBitKHR): return "FragmentShadingRateAttachmentReadBitKHR";
         case(VkAccessFlagBits::CommandPreprocessReadBitNV): return "CommandPreprocessReadBitNV";
         case(VkAccessFlagBits::CommandPreprocessWriteBitNV): return "CommandPreprocessWriteBitNV";
-        case(VkAccessFlagBits::NoneKHR): return "NoneKHR";
+        case(VkAccessFlagBits::None): return "None";
         default: return "UNKNOWN";
     }
 }
@@ -2208,7 +2256,7 @@ std::string to_string(VkAccessFlags flag){
     if (flag & VkAccessFlagBits::FragmentShadingRateAttachmentReadBitKHR) out += "FragmentShadingRateAttachmentReadBitKHR | ";
     if (flag & VkAccessFlagBits::CommandPreprocessReadBitNV) out += "CommandPreprocessReadBitNV | ";
     if (flag & VkAccessFlagBits::CommandPreprocessWriteBitNV) out += "CommandPreprocessWriteBitNV | ";
-    if (flag & VkAccessFlagBits::NoneKHR) out += "NoneKHR | ";
+    if (flag & VkAccessFlagBits::None) out += "None | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkBufferUsageFlagBits val) {
@@ -2375,6 +2423,7 @@ const char * to_string(VkImageCreateFlagBits val) {
         case(VkImageCreateFlagBits::CornerSampledBitNV): return "CornerSampledBitNV";
         case(VkImageCreateFlagBits::SampleLocationsCompatibleDepthBitEXT): return "SampleLocationsCompatibleDepthBitEXT";
         case(VkImageCreateFlagBits::SubsampledBitEXT): return "SubsampledBitEXT";
+        case(VkImageCreateFlagBits::FragmentDensityMapOffsetBitQCOM): return "FragmentDensityMapOffsetBitQCOM";
         case(VkImageCreateFlagBits::Alias): return "Alias";
         case(VkImageCreateFlagBits::SplitInstanceBindRegions): return "SplitInstanceBindRegions";
         case(VkImageCreateFlagBits::e2DArrayCompatible): return "e2DArrayCompatible";
@@ -2396,6 +2445,7 @@ std::string to_string(VkImageCreateFlags flag){
     if (flag & VkImageCreateFlagBits::CornerSampledBitNV) out += "CornerSampledBitNV | ";
     if (flag & VkImageCreateFlagBits::SampleLocationsCompatibleDepthBitEXT) out += "SampleLocationsCompatibleDepthBitEXT | ";
     if (flag & VkImageCreateFlagBits::SubsampledBitEXT) out += "SubsampledBitEXT | ";
+    if (flag & VkImageCreateFlagBits::FragmentDensityMapOffsetBitQCOM) out += "FragmentDensityMapOffsetBitQCOM | ";
     if (flag & VkImageCreateFlagBits::Alias) out += "Alias | ";
     if (flag & VkImageCreateFlagBits::SplitInstanceBindRegions) out += "SplitInstanceBindRegions | ";
     if (flag & VkImageCreateFlagBits::e2DArrayCompatible) out += "e2DArrayCompatible | ";
@@ -2438,6 +2488,8 @@ const char * to_string(VkPipelineCreateFlagBits val) {
         case(VkPipelineCreateFlagBits::DisableOptimization): return "DisableOptimization";
         case(VkPipelineCreateFlagBits::AllowDerivatives): return "AllowDerivatives";
         case(VkPipelineCreateFlagBits::Derivative): return "Derivative";
+        case(VkPipelineCreateFlagBits::RenderingFragmentShadingRateAttachmentBitKHR): return "RenderingFragmentShadingRateAttachmentBitKHR";
+        case(VkPipelineCreateFlagBits::RenderingFragmentDensityMapAttachmentBitEXT): return "RenderingFragmentDensityMapAttachmentBitEXT";
         case(VkPipelineCreateFlagBits::RayTracingNoNullAnyHitShadersBitKHR): return "RayTracingNoNullAnyHitShadersBitKHR";
         case(VkPipelineCreateFlagBits::RayTracingNoNullClosestHitShadersBitKHR): return "RayTracingNoNullClosestHitShadersBitKHR";
         case(VkPipelineCreateFlagBits::RayTracingNoNullMissShadersBitKHR): return "RayTracingNoNullMissShadersBitKHR";
@@ -2450,11 +2502,11 @@ const char * to_string(VkPipelineCreateFlagBits val) {
         case(VkPipelineCreateFlagBits::CaptureInternalRepresentationsBitKHR): return "CaptureInternalRepresentationsBitKHR";
         case(VkPipelineCreateFlagBits::IndirectBindableBitNV): return "IndirectBindableBitNV";
         case(VkPipelineCreateFlagBits::LibraryBitKHR): return "LibraryBitKHR";
-        case(VkPipelineCreateFlagBits::FailOnPipelineCompileRequiredBitEXT): return "FailOnPipelineCompileRequiredBitEXT";
-        case(VkPipelineCreateFlagBits::EarlyReturnOnFailureBitEXT): return "EarlyReturnOnFailureBitEXT";
         case(VkPipelineCreateFlagBits::RayTracingAllowMotionBitNV): return "RayTracingAllowMotionBitNV";
         case(VkPipelineCreateFlagBits::ViewIndexFromDeviceIndex): return "ViewIndexFromDeviceIndex";
         case(VkPipelineCreateFlagBits::DispatchBase): return "DispatchBase";
+        case(VkPipelineCreateFlagBits::FailOnPipelineCompileRequired): return "FailOnPipelineCompileRequired";
+        case(VkPipelineCreateFlagBits::EarlyReturnOnFailure): return "EarlyReturnOnFailure";
         default: return "UNKNOWN";
     }
 }
@@ -2464,6 +2516,8 @@ std::string to_string(VkPipelineCreateFlags flag){
     if (flag & VkPipelineCreateFlagBits::DisableOptimization) out += "DisableOptimization | ";
     if (flag & VkPipelineCreateFlagBits::AllowDerivatives) out += "AllowDerivatives | ";
     if (flag & VkPipelineCreateFlagBits::Derivative) out += "Derivative | ";
+    if (flag & VkPipelineCreateFlagBits::RenderingFragmentShadingRateAttachmentBitKHR) out += "RenderingFragmentShadingRateAttachmentBitKHR | ";
+    if (flag & VkPipelineCreateFlagBits::RenderingFragmentDensityMapAttachmentBitEXT) out += "RenderingFragmentDensityMapAttachmentBitEXT | ";
     if (flag & VkPipelineCreateFlagBits::RayTracingNoNullAnyHitShadersBitKHR) out += "RayTracingNoNullAnyHitShadersBitKHR | ";
     if (flag & VkPipelineCreateFlagBits::RayTracingNoNullClosestHitShadersBitKHR) out += "RayTracingNoNullClosestHitShadersBitKHR | ";
     if (flag & VkPipelineCreateFlagBits::RayTracingNoNullMissShadersBitKHR) out += "RayTracingNoNullMissShadersBitKHR | ";
@@ -2476,25 +2530,25 @@ std::string to_string(VkPipelineCreateFlags flag){
     if (flag & VkPipelineCreateFlagBits::CaptureInternalRepresentationsBitKHR) out += "CaptureInternalRepresentationsBitKHR | ";
     if (flag & VkPipelineCreateFlagBits::IndirectBindableBitNV) out += "IndirectBindableBitNV | ";
     if (flag & VkPipelineCreateFlagBits::LibraryBitKHR) out += "LibraryBitKHR | ";
-    if (flag & VkPipelineCreateFlagBits::FailOnPipelineCompileRequiredBitEXT) out += "FailOnPipelineCompileRequiredBitEXT | ";
-    if (flag & VkPipelineCreateFlagBits::EarlyReturnOnFailureBitEXT) out += "EarlyReturnOnFailureBitEXT | ";
     if (flag & VkPipelineCreateFlagBits::RayTracingAllowMotionBitNV) out += "RayTracingAllowMotionBitNV | ";
     if (flag & VkPipelineCreateFlagBits::ViewIndexFromDeviceIndex) out += "ViewIndexFromDeviceIndex | ";
     if (flag & VkPipelineCreateFlagBits::DispatchBase) out += "DispatchBase | ";
+    if (flag & VkPipelineCreateFlagBits::FailOnPipelineCompileRequired) out += "FailOnPipelineCompileRequired | ";
+    if (flag & VkPipelineCreateFlagBits::EarlyReturnOnFailure) out += "EarlyReturnOnFailure | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkPipelineShaderStageCreateFlagBits val) {
     switch(val) {
-        case(VkPipelineShaderStageCreateFlagBits::AllowVaryingSubgroupSizeBitEXT): return "AllowVaryingSubgroupSizeBitEXT";
-        case(VkPipelineShaderStageCreateFlagBits::RequireFullSubgroupsBitEXT): return "RequireFullSubgroupsBitEXT";
+        case(VkPipelineShaderStageCreateFlagBits::AllowVaryingSubgroupSize): return "AllowVaryingSubgroupSize";
+        case(VkPipelineShaderStageCreateFlagBits::RequireFullSubgroups): return "RequireFullSubgroups";
         default: return "UNKNOWN";
     }
 }
 std::string to_string(VkPipelineShaderStageCreateFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkPipelineShaderStageCreateFlagBits::AllowVaryingSubgroupSizeBitEXT) out += "AllowVaryingSubgroupSizeBitEXT | ";
-    if (flag & VkPipelineShaderStageCreateFlagBits::RequireFullSubgroupsBitEXT) out += "RequireFullSubgroupsBitEXT | ";
+    if (flag & VkPipelineShaderStageCreateFlagBits::AllowVaryingSubgroupSize) out += "AllowVaryingSubgroupSize | ";
+    if (flag & VkPipelineShaderStageCreateFlagBits::RequireFullSubgroups) out += "RequireFullSubgroups | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkColorComponentFlagBits val) {
@@ -2691,6 +2745,7 @@ const char * to_string(VkImageAspectFlagBits val) {
         case(VkImageAspectFlagBits::MemoryPlane1BitEXT): return "MemoryPlane1BitEXT";
         case(VkImageAspectFlagBits::MemoryPlane2BitEXT): return "MemoryPlane2BitEXT";
         case(VkImageAspectFlagBits::MemoryPlane3BitEXT): return "MemoryPlane3BitEXT";
+        case(VkImageAspectFlagBits::NoneKHR): return "NoneKHR";
         case(VkImageAspectFlagBits::Plane0): return "Plane0";
         case(VkImageAspectFlagBits::Plane1): return "Plane1";
         case(VkImageAspectFlagBits::Plane2): return "Plane2";
@@ -2708,6 +2763,7 @@ std::string to_string(VkImageAspectFlags flag){
     if (flag & VkImageAspectFlagBits::MemoryPlane1BitEXT) out += "MemoryPlane1BitEXT | ";
     if (flag & VkImageAspectFlagBits::MemoryPlane2BitEXT) out += "MemoryPlane2BitEXT | ";
     if (flag & VkImageAspectFlagBits::MemoryPlane3BitEXT) out += "MemoryPlane3BitEXT | ";
+    if (flag & VkImageAspectFlagBits::NoneKHR) out += "NoneKHR | ";
     if (flag & VkImageAspectFlagBits::Plane0) out += "Plane0 | ";
     if (flag & VkImageAspectFlagBits::Plane1) out += "Plane1 | ";
     if (flag & VkImageAspectFlagBits::Plane2) out += "Plane2 | ";
@@ -2769,7 +2825,7 @@ const char * to_string(VkPipelineStageFlagBits val) {
         case(VkPipelineStageFlagBits::FragmentDensityProcessBitEXT): return "FragmentDensityProcessBitEXT";
         case(VkPipelineStageFlagBits::FragmentShadingRateAttachmentBitKHR): return "FragmentShadingRateAttachmentBitKHR";
         case(VkPipelineStageFlagBits::CommandPreprocessBitNV): return "CommandPreprocessBitNV";
-        case(VkPipelineStageFlagBits::NoneKHR): return "NoneKHR";
+        case(VkPipelineStageFlagBits::None): return "None";
         default: return "UNKNOWN";
     }
 }
@@ -2802,7 +2858,7 @@ std::string to_string(VkPipelineStageFlags flag){
     if (flag & VkPipelineStageFlagBits::FragmentDensityProcessBitEXT) out += "FragmentDensityProcessBitEXT | ";
     if (flag & VkPipelineStageFlagBits::FragmentShadingRateAttachmentBitKHR) out += "FragmentShadingRateAttachmentBitKHR | ";
     if (flag & VkPipelineStageFlagBits::CommandPreprocessBitNV) out += "CommandPreprocessBitNV | ";
-    if (flag & VkPipelineStageFlagBits::NoneKHR) out += "NoneKHR | ";
+    if (flag & VkPipelineStageFlagBits::None) out += "None | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkCommandPoolCreateFlagBits val) {
@@ -3113,8 +3169,8 @@ std::string to_string(VkIndirectStateFlagsNV flag){
     if (flag & VkIndirectStateFlagBitsNV::FlagFrontfaceBitNV) out += "FlagFrontfaceBitNV | ";
     return out.substr(0, out.size() - 3);
 }
-const char * to_string(VkPrivateDataSlotCreateFlagBitsEXT val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
-std::string to_string(VkPrivateDataSlotCreateFlagsEXT flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
+const char * to_string(VkPrivateDataSlotCreateFlagBits val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
+std::string to_string(VkPrivateDataSlotCreateFlags flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
 const char * to_string(VkDescriptorSetLayoutCreateFlagBits val) {
     switch(val) {
         case(VkDescriptorSetLayoutCreateFlagBits::PushDescriptorBitKHR): return "PushDescriptorBitKHR";
@@ -3361,6 +3417,9 @@ const char * to_string(VkSubpassDescriptionFlagBits val) {
         case(VkSubpassDescriptionFlagBits::PerViewPositionXOnlyBitNVX): return "PerViewPositionXOnlyBitNVX";
         case(VkSubpassDescriptionFlagBits::FragmentRegionBitQCOM): return "FragmentRegionBitQCOM";
         case(VkSubpassDescriptionFlagBits::ShaderResolveBitQCOM): return "ShaderResolveBitQCOM";
+        case(VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentColorAccessBitARM): return "RasterizationOrderAttachmentColorAccessBitARM";
+        case(VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentDepthAccessBitARM): return "RasterizationOrderAttachmentDepthAccessBitARM";
+        case(VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentStencilAccessBitARM): return "RasterizationOrderAttachmentStencilAccessBitARM";
         default: return "UNKNOWN";
     }
 }
@@ -3371,6 +3430,9 @@ std::string to_string(VkSubpassDescriptionFlags flag){
     if (flag & VkSubpassDescriptionFlagBits::PerViewPositionXOnlyBitNVX) out += "PerViewPositionXOnlyBitNVX | ";
     if (flag & VkSubpassDescriptionFlagBits::FragmentRegionBitQCOM) out += "FragmentRegionBitQCOM | ";
     if (flag & VkSubpassDescriptionFlagBits::ShaderResolveBitQCOM) out += "ShaderResolveBitQCOM | ";
+    if (flag & VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentColorAccessBitARM) out += "RasterizationOrderAttachmentColorAccessBitARM | ";
+    if (flag & VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentDepthAccessBitARM) out += "RasterizationOrderAttachmentDepthAccessBitARM | ";
+    if (flag & VkSubpassDescriptionFlagBits::RasterizationOrderAttachmentStencilAccessBitARM) out += "RasterizationOrderAttachmentStencilAccessBitARM | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkDebugUtilsMessageSeverityFlagBitsEXT val) {
@@ -3553,20 +3615,20 @@ std::string to_string(VkDeviceDiagnosticsConfigFlagsNV flag){
     if (flag & VkDeviceDiagnosticsConfigFlagBitsNV::EnableAutomaticCheckpointsBitNV) out += "EnableAutomaticCheckpointsBitNV | ";
     return out.substr(0, out.size() - 3);
 }
-const char * to_string(VkPipelineCreationFeedbackFlagBitsEXT val) {
+const char * to_string(VkPipelineCreationFeedbackFlagBits val) {
     switch(val) {
-        case(VkPipelineCreationFeedbackFlagBitsEXT::ValidBitEXT): return "ValidBitEXT";
-        case(VkPipelineCreationFeedbackFlagBitsEXT::ApplicationPipelineCacheHitBitEXT): return "ApplicationPipelineCacheHitBitEXT";
-        case(VkPipelineCreationFeedbackFlagBitsEXT::BasePipelineAccelerationBitEXT): return "BasePipelineAccelerationBitEXT";
+        case(VkPipelineCreationFeedbackFlagBits::Valid): return "Valid";
+        case(VkPipelineCreationFeedbackFlagBits::ApplicationPipelineCacheHit): return "ApplicationPipelineCacheHit";
+        case(VkPipelineCreationFeedbackFlagBits::BasePipelineAcceleration): return "BasePipelineAcceleration";
         default: return "UNKNOWN";
     }
 }
-std::string to_string(VkPipelineCreationFeedbackFlagsEXT flag){
+std::string to_string(VkPipelineCreationFeedbackFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkPipelineCreationFeedbackFlagBitsEXT::ValidBitEXT) out += "ValidBitEXT | ";
-    if (flag & VkPipelineCreationFeedbackFlagBitsEXT::ApplicationPipelineCacheHitBitEXT) out += "ApplicationPipelineCacheHitBitEXT | ";
-    if (flag & VkPipelineCreationFeedbackFlagBitsEXT::BasePipelineAccelerationBitEXT) out += "BasePipelineAccelerationBitEXT | ";
+    if (flag & VkPipelineCreationFeedbackFlagBits::Valid) out += "Valid | ";
+    if (flag & VkPipelineCreationFeedbackFlagBits::ApplicationPipelineCacheHit) out += "ApplicationPipelineCacheHit | ";
+    if (flag & VkPipelineCreationFeedbackFlagBits::BasePipelineAcceleration) out += "BasePipelineAcceleration | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkPerformanceCounterDescriptionFlagBitsKHR val) {
@@ -3591,231 +3653,258 @@ const char * to_string(VkShaderModuleCreateFlagBits val) { UNUSED_VARIABLE(val);
 std::string to_string(VkShaderModuleCreateFlags flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
 const char * to_string(VkPipelineCompilerControlFlagBitsAMD val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
 std::string to_string(VkPipelineCompilerControlFlagsAMD flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
-const char * to_string(VkToolPurposeFlagBitsEXT val) {
+const char * to_string(VkToolPurposeFlagBits val) {
     switch(val) {
-        case(VkToolPurposeFlagBitsEXT::ValidationBitEXT): return "ValidationBitEXT";
-        case(VkToolPurposeFlagBitsEXT::ProfilingBitEXT): return "ProfilingBitEXT";
-        case(VkToolPurposeFlagBitsEXT::TracingBitEXT): return "TracingBitEXT";
-        case(VkToolPurposeFlagBitsEXT::AdditionalFeaturesBitEXT): return "AdditionalFeaturesBitEXT";
-        case(VkToolPurposeFlagBitsEXT::ModifyingFeaturesBitEXT): return "ModifyingFeaturesBitEXT";
-        case(VkToolPurposeFlagBitsEXT::DebugReportingBitEXT): return "DebugReportingBitEXT";
-        case(VkToolPurposeFlagBitsEXT::DebugMarkersBitEXT): return "DebugMarkersBitEXT";
+        case(VkToolPurposeFlagBits::Validation): return "Validation";
+        case(VkToolPurposeFlagBits::Profiling): return "Profiling";
+        case(VkToolPurposeFlagBits::Tracing): return "Tracing";
+        case(VkToolPurposeFlagBits::AdditionalFeatures): return "AdditionalFeatures";
+        case(VkToolPurposeFlagBits::ModifyingFeatures): return "ModifyingFeatures";
+        case(VkToolPurposeFlagBits::DebugReportingBitEXT): return "DebugReportingBitEXT";
+        case(VkToolPurposeFlagBits::DebugMarkersBitEXT): return "DebugMarkersBitEXT";
         default: return "UNKNOWN";
     }
 }
-std::string to_string(VkToolPurposeFlagsEXT flag){
+std::string to_string(VkToolPurposeFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkToolPurposeFlagBitsEXT::ValidationBitEXT) out += "ValidationBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::ProfilingBitEXT) out += "ProfilingBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::TracingBitEXT) out += "TracingBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::AdditionalFeaturesBitEXT) out += "AdditionalFeaturesBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::ModifyingFeaturesBitEXT) out += "ModifyingFeaturesBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::DebugReportingBitEXT) out += "DebugReportingBitEXT | ";
-    if (flag & VkToolPurposeFlagBitsEXT::DebugMarkersBitEXT) out += "DebugMarkersBitEXT | ";
+    if (flag & VkToolPurposeFlagBits::Validation) out += "Validation | ";
+    if (flag & VkToolPurposeFlagBits::Profiling) out += "Profiling | ";
+    if (flag & VkToolPurposeFlagBits::Tracing) out += "Tracing | ";
+    if (flag & VkToolPurposeFlagBits::AdditionalFeatures) out += "AdditionalFeatures | ";
+    if (flag & VkToolPurposeFlagBits::ModifyingFeatures) out += "ModifyingFeatures | ";
+    if (flag & VkToolPurposeFlagBits::DebugReportingBitEXT) out += "DebugReportingBitEXT | ";
+    if (flag & VkToolPurposeFlagBits::DebugMarkersBitEXT) out += "DebugMarkersBitEXT | ";
     return out.substr(0, out.size() - 3);
 }
-const char * to_string(VkAccessFlagBits2KHR val) {
+const char * to_string(VkAccessFlagBits2 val) {
     switch(val) {
-        case(VkAccessFlagBits2KHR::e2NoneKHR): return "e2NoneKHR";
-        case(VkAccessFlagBits2KHR::e2IndirectCommandReadBitKHR): return "e2IndirectCommandReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2IndexReadBitKHR): return "e2IndexReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2VertexAttributeReadBitKHR): return "e2VertexAttributeReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2UniformReadBitKHR): return "e2UniformReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2InputAttachmentReadBitKHR): return "e2InputAttachmentReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2ShaderReadBitKHR): return "e2ShaderReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2ShaderWriteBitKHR): return "e2ShaderWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2ColorAttachmentReadBitKHR): return "e2ColorAttachmentReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2ColorAttachmentWriteBitKHR): return "e2ColorAttachmentWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2DepthStencilAttachmentReadBitKHR): return "e2DepthStencilAttachmentReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2DepthStencilAttachmentWriteBitKHR): return "e2DepthStencilAttachmentWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2TransferReadBitKHR): return "e2TransferReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2TransferWriteBitKHR): return "e2TransferWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2HostReadBitKHR): return "e2HostReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2HostWriteBitKHR): return "e2HostWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2MemoryReadBitKHR): return "e2MemoryReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2MemoryWriteBitKHR): return "e2MemoryWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2ShaderSampledReadBitKHR): return "e2ShaderSampledReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2ShaderStorageReadBitKHR): return "e2ShaderStorageReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2ShaderStorageWriteBitKHR): return "e2ShaderStorageWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2VideoDecodeReadBitKHR): return "e2VideoDecodeReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2VideoDecodeWriteBitKHR): return "e2VideoDecodeWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2VideoEncodeReadBitKHR): return "e2VideoEncodeReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2VideoEncodeWriteBitKHR): return "e2VideoEncodeWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2TransformFeedbackWriteBitEXT): return "e2TransformFeedbackWriteBitEXT";
-        case(VkAccessFlagBits2KHR::e2TransformFeedbackCounterReadBitEXT): return "e2TransformFeedbackCounterReadBitEXT";
-        case(VkAccessFlagBits2KHR::e2TransformFeedbackCounterWriteBitEXT): return "e2TransformFeedbackCounterWriteBitEXT";
-        case(VkAccessFlagBits2KHR::e2ConditionalRenderingReadBitEXT): return "e2ConditionalRenderingReadBitEXT";
-        case(VkAccessFlagBits2KHR::e2CommandPreprocessReadBitNV): return "e2CommandPreprocessReadBitNV";
-        case(VkAccessFlagBits2KHR::e2CommandPreprocessWriteBitNV): return "e2CommandPreprocessWriteBitNV";
-        case(VkAccessFlagBits2KHR::e2FragmentShadingRateAttachmentReadBitKHR): return "e2FragmentShadingRateAttachmentReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2AccelerationStructureReadBitKHR): return "e2AccelerationStructureReadBitKHR";
-        case(VkAccessFlagBits2KHR::e2AccelerationStructureWriteBitKHR): return "e2AccelerationStructureWriteBitKHR";
-        case(VkAccessFlagBits2KHR::e2FragmentDensityMapReadBitEXT): return "e2FragmentDensityMapReadBitEXT";
-        case(VkAccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentBitEXT): return "e2ColorAttachmentReadNoncoherentBitEXT";
-        case(VkAccessFlagBits2KHR::e2InvocationMaskReadBitHUAWEI): return "e2InvocationMaskReadBitHUAWEI";
+        case(VkAccessFlagBits2::Access2None): return "Access2None";
+        case(VkAccessFlagBits2::Access2IndirectCommandRead): return "Access2IndirectCommandRead";
+        case(VkAccessFlagBits2::Access2IndexRead): return "Access2IndexRead";
+        case(VkAccessFlagBits2::Access2VertexAttributeRead): return "Access2VertexAttributeRead";
+        case(VkAccessFlagBits2::Access2UniformRead): return "Access2UniformRead";
+        case(VkAccessFlagBits2::Access2InputAttachmentRead): return "Access2InputAttachmentRead";
+        case(VkAccessFlagBits2::Access2ShaderRead): return "Access2ShaderRead";
+        case(VkAccessFlagBits2::Access2ShaderWrite): return "Access2ShaderWrite";
+        case(VkAccessFlagBits2::Access2ColorAttachmentRead): return "Access2ColorAttachmentRead";
+        case(VkAccessFlagBits2::Access2ColorAttachmentWrite): return "Access2ColorAttachmentWrite";
+        case(VkAccessFlagBits2::Access2DepthStencilAttachmentRead): return "Access2DepthStencilAttachmentRead";
+        case(VkAccessFlagBits2::Access2DepthStencilAttachmentWrite): return "Access2DepthStencilAttachmentWrite";
+        case(VkAccessFlagBits2::Access2TransferRead): return "Access2TransferRead";
+        case(VkAccessFlagBits2::Access2TransferWrite): return "Access2TransferWrite";
+        case(VkAccessFlagBits2::Access2HostRead): return "Access2HostRead";
+        case(VkAccessFlagBits2::Access2HostWrite): return "Access2HostWrite";
+        case(VkAccessFlagBits2::Access2MemoryRead): return "Access2MemoryRead";
+        case(VkAccessFlagBits2::Access2MemoryWrite): return "Access2MemoryWrite";
+        case(VkAccessFlagBits2::Access2ShaderSampledRead): return "Access2ShaderSampledRead";
+        case(VkAccessFlagBits2::Access2ShaderStorageRead): return "Access2ShaderStorageRead";
+        case(VkAccessFlagBits2::Access2ShaderStorageWrite): return "Access2ShaderStorageWrite";
+        case(VkAccessFlagBits2::Access2VideoDecodeReadBitKHR): return "Access2VideoDecodeReadBitKHR";
+        case(VkAccessFlagBits2::Access2VideoDecodeWriteBitKHR): return "Access2VideoDecodeWriteBitKHR";
+        case(VkAccessFlagBits2::Access2VideoEncodeReadBitKHR): return "Access2VideoEncodeReadBitKHR";
+        case(VkAccessFlagBits2::Access2VideoEncodeWriteBitKHR): return "Access2VideoEncodeWriteBitKHR";
+        case(VkAccessFlagBits2::Access2TransformFeedbackWriteBitEXT): return "Access2TransformFeedbackWriteBitEXT";
+        case(VkAccessFlagBits2::Access2TransformFeedbackCounterReadBitEXT): return "Access2TransformFeedbackCounterReadBitEXT";
+        case(VkAccessFlagBits2::Access2TransformFeedbackCounterWriteBitEXT): return "Access2TransformFeedbackCounterWriteBitEXT";
+        case(VkAccessFlagBits2::Access2ConditionalRenderingReadBitEXT): return "Access2ConditionalRenderingReadBitEXT";
+        case(VkAccessFlagBits2::Access2CommandPreprocessReadBitNV): return "Access2CommandPreprocessReadBitNV";
+        case(VkAccessFlagBits2::Access2CommandPreprocessWriteBitNV): return "Access2CommandPreprocessWriteBitNV";
+        case(VkAccessFlagBits2::Access2FragmentShadingRateAttachmentReadBitKHR): return "Access2FragmentShadingRateAttachmentReadBitKHR";
+        case(VkAccessFlagBits2::Access2AccelerationStructureReadBitKHR): return "Access2AccelerationStructureReadBitKHR";
+        case(VkAccessFlagBits2::Access2AccelerationStructureWriteBitKHR): return "Access2AccelerationStructureWriteBitKHR";
+        case(VkAccessFlagBits2::Access2FragmentDensityMapReadBitEXT): return "Access2FragmentDensityMapReadBitEXT";
+        case(VkAccessFlagBits2::Access2ColorAttachmentReadNoncoherentBitEXT): return "Access2ColorAttachmentReadNoncoherentBitEXT";
+        case(VkAccessFlagBits2::Access2InvocationMaskReadBitHUAWEI): return "Access2InvocationMaskReadBitHUAWEI";
         default: return "UNKNOWN";
     }
 }
-std::string to_string(VkAccessFlags2KHR flag){
+std::string to_string(VkAccessFlags2 flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkAccessFlagBits2KHR::e2NoneKHR) out += "e2NoneKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2IndirectCommandReadBitKHR) out += "e2IndirectCommandReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2IndexReadBitKHR) out += "e2IndexReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2VertexAttributeReadBitKHR) out += "e2VertexAttributeReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2UniformReadBitKHR) out += "e2UniformReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2InputAttachmentReadBitKHR) out += "e2InputAttachmentReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ShaderReadBitKHR) out += "e2ShaderReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ShaderWriteBitKHR) out += "e2ShaderWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ColorAttachmentReadBitKHR) out += "e2ColorAttachmentReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ColorAttachmentWriteBitKHR) out += "e2ColorAttachmentWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2DepthStencilAttachmentReadBitKHR) out += "e2DepthStencilAttachmentReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2DepthStencilAttachmentWriteBitKHR) out += "e2DepthStencilAttachmentWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2TransferReadBitKHR) out += "e2TransferReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2TransferWriteBitKHR) out += "e2TransferWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2HostReadBitKHR) out += "e2HostReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2HostWriteBitKHR) out += "e2HostWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2MemoryReadBitKHR) out += "e2MemoryReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2MemoryWriteBitKHR) out += "e2MemoryWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ShaderSampledReadBitKHR) out += "e2ShaderSampledReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ShaderStorageReadBitKHR) out += "e2ShaderStorageReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2ShaderStorageWriteBitKHR) out += "e2ShaderStorageWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2VideoDecodeReadBitKHR) out += "e2VideoDecodeReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2VideoDecodeWriteBitKHR) out += "e2VideoDecodeWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2VideoEncodeReadBitKHR) out += "e2VideoEncodeReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2VideoEncodeWriteBitKHR) out += "e2VideoEncodeWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2TransformFeedbackWriteBitEXT) out += "e2TransformFeedbackWriteBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2TransformFeedbackCounterReadBitEXT) out += "e2TransformFeedbackCounterReadBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2TransformFeedbackCounterWriteBitEXT) out += "e2TransformFeedbackCounterWriteBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2ConditionalRenderingReadBitEXT) out += "e2ConditionalRenderingReadBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2CommandPreprocessReadBitNV) out += "e2CommandPreprocessReadBitNV | ";
-    if (flag & VkAccessFlagBits2KHR::e2CommandPreprocessWriteBitNV) out += "e2CommandPreprocessWriteBitNV | ";
-    if (flag & VkAccessFlagBits2KHR::e2FragmentShadingRateAttachmentReadBitKHR) out += "e2FragmentShadingRateAttachmentReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2AccelerationStructureReadBitKHR) out += "e2AccelerationStructureReadBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2AccelerationStructureWriteBitKHR) out += "e2AccelerationStructureWriteBitKHR | ";
-    if (flag & VkAccessFlagBits2KHR::e2FragmentDensityMapReadBitEXT) out += "e2FragmentDensityMapReadBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2ColorAttachmentReadNoncoherentBitEXT) out += "e2ColorAttachmentReadNoncoherentBitEXT | ";
-    if (flag & VkAccessFlagBits2KHR::e2InvocationMaskReadBitHUAWEI) out += "e2InvocationMaskReadBitHUAWEI | ";
+    if (flag & VkAccessFlagBits2::Access2None) out += "Access2None | ";
+    if (flag & VkAccessFlagBits2::Access2IndirectCommandRead) out += "Access2IndirectCommandRead | ";
+    if (flag & VkAccessFlagBits2::Access2IndexRead) out += "Access2IndexRead | ";
+    if (flag & VkAccessFlagBits2::Access2VertexAttributeRead) out += "Access2VertexAttributeRead | ";
+    if (flag & VkAccessFlagBits2::Access2UniformRead) out += "Access2UniformRead | ";
+    if (flag & VkAccessFlagBits2::Access2InputAttachmentRead) out += "Access2InputAttachmentRead | ";
+    if (flag & VkAccessFlagBits2::Access2ShaderRead) out += "Access2ShaderRead | ";
+    if (flag & VkAccessFlagBits2::Access2ShaderWrite) out += "Access2ShaderWrite | ";
+    if (flag & VkAccessFlagBits2::Access2ColorAttachmentRead) out += "Access2ColorAttachmentRead | ";
+    if (flag & VkAccessFlagBits2::Access2ColorAttachmentWrite) out += "Access2ColorAttachmentWrite | ";
+    if (flag & VkAccessFlagBits2::Access2DepthStencilAttachmentRead) out += "Access2DepthStencilAttachmentRead | ";
+    if (flag & VkAccessFlagBits2::Access2DepthStencilAttachmentWrite) out += "Access2DepthStencilAttachmentWrite | ";
+    if (flag & VkAccessFlagBits2::Access2TransferRead) out += "Access2TransferRead | ";
+    if (flag & VkAccessFlagBits2::Access2TransferWrite) out += "Access2TransferWrite | ";
+    if (flag & VkAccessFlagBits2::Access2HostRead) out += "Access2HostRead | ";
+    if (flag & VkAccessFlagBits2::Access2HostWrite) out += "Access2HostWrite | ";
+    if (flag & VkAccessFlagBits2::Access2MemoryRead) out += "Access2MemoryRead | ";
+    if (flag & VkAccessFlagBits2::Access2MemoryWrite) out += "Access2MemoryWrite | ";
+    if (flag & VkAccessFlagBits2::Access2ShaderSampledRead) out += "Access2ShaderSampledRead | ";
+    if (flag & VkAccessFlagBits2::Access2ShaderStorageRead) out += "Access2ShaderStorageRead | ";
+    if (flag & VkAccessFlagBits2::Access2ShaderStorageWrite) out += "Access2ShaderStorageWrite | ";
+    if (flag & VkAccessFlagBits2::Access2VideoDecodeReadBitKHR) out += "Access2VideoDecodeReadBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2VideoDecodeWriteBitKHR) out += "Access2VideoDecodeWriteBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2VideoEncodeReadBitKHR) out += "Access2VideoEncodeReadBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2VideoEncodeWriteBitKHR) out += "Access2VideoEncodeWriteBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2TransformFeedbackWriteBitEXT) out += "Access2TransformFeedbackWriteBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2TransformFeedbackCounterReadBitEXT) out += "Access2TransformFeedbackCounterReadBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2TransformFeedbackCounterWriteBitEXT) out += "Access2TransformFeedbackCounterWriteBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2ConditionalRenderingReadBitEXT) out += "Access2ConditionalRenderingReadBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2CommandPreprocessReadBitNV) out += "Access2CommandPreprocessReadBitNV | ";
+    if (flag & VkAccessFlagBits2::Access2CommandPreprocessWriteBitNV) out += "Access2CommandPreprocessWriteBitNV | ";
+    if (flag & VkAccessFlagBits2::Access2FragmentShadingRateAttachmentReadBitKHR) out += "Access2FragmentShadingRateAttachmentReadBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2AccelerationStructureReadBitKHR) out += "Access2AccelerationStructureReadBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2AccelerationStructureWriteBitKHR) out += "Access2AccelerationStructureWriteBitKHR | ";
+    if (flag & VkAccessFlagBits2::Access2FragmentDensityMapReadBitEXT) out += "Access2FragmentDensityMapReadBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2ColorAttachmentReadNoncoherentBitEXT) out += "Access2ColorAttachmentReadNoncoherentBitEXT | ";
+    if (flag & VkAccessFlagBits2::Access2InvocationMaskReadBitHUAWEI) out += "Access2InvocationMaskReadBitHUAWEI | ";
     return out.substr(0, out.size() - 3);
 }
-const char * to_string(VkPipelineStageFlagBits2KHR val) {
+const char * to_string(VkPipelineStageFlagBits2 val) {
     switch(val) {
-        case(VkPipelineStageFlagBits2KHR::e2NoneKHR): return "e2NoneKHR";
-        case(VkPipelineStageFlagBits2KHR::e2TopOfPipeBitKHR): return "e2TopOfPipeBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2DrawIndirectBitKHR): return "e2DrawIndirectBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2VertexInputBitKHR): return "e2VertexInputBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2VertexShaderBitKHR): return "e2VertexShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2TessellationControlShaderBitKHR): return "e2TessellationControlShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2TessellationEvaluationShaderBitKHR): return "e2TessellationEvaluationShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2GeometryShaderBitKHR): return "e2GeometryShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2FragmentShaderBitKHR): return "e2FragmentShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2EarlyFragmentTestsBitKHR): return "e2EarlyFragmentTestsBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2LateFragmentTestsBitKHR): return "e2LateFragmentTestsBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2ColorAttachmentOutputBitKHR): return "e2ColorAttachmentOutputBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2ComputeShaderBitKHR): return "e2ComputeShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2AllTransferBitKHR): return "e2AllTransferBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2BottomOfPipeBitKHR): return "e2BottomOfPipeBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2HostBitKHR): return "e2HostBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2AllGraphicsBitKHR): return "e2AllGraphicsBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2AllCommandsBitKHR): return "e2AllCommandsBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2CopyBitKHR): return "e2CopyBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2ResolveBitKHR): return "e2ResolveBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2BlitBitKHR): return "e2BlitBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2ClearBitKHR): return "e2ClearBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2IndexInputBitKHR): return "e2IndexInputBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2VertexAttributeInputBitKHR): return "e2VertexAttributeInputBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2PreRasterizationShadersBitKHR): return "e2PreRasterizationShadersBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2VideoDecodeBitKHR): return "e2VideoDecodeBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2VideoEncodeBitKHR): return "e2VideoEncodeBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2TransformFeedbackBitEXT): return "e2TransformFeedbackBitEXT";
-        case(VkPipelineStageFlagBits2KHR::e2ConditionalRenderingBitEXT): return "e2ConditionalRenderingBitEXT";
-        case(VkPipelineStageFlagBits2KHR::e2CommandPreprocessBitNV): return "e2CommandPreprocessBitNV";
-        case(VkPipelineStageFlagBits2KHR::e2FragmentShadingRateAttachmentBitKHR): return "e2FragmentShadingRateAttachmentBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2AccelerationStructureBuildBitKHR): return "e2AccelerationStructureBuildBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2RayTracingShaderBitKHR): return "e2RayTracingShaderBitKHR";
-        case(VkPipelineStageFlagBits2KHR::e2FragmentDensityProcessBitEXT): return "e2FragmentDensityProcessBitEXT";
-        case(VkPipelineStageFlagBits2KHR::e2TaskShaderBitNV): return "e2TaskShaderBitNV";
-        case(VkPipelineStageFlagBits2KHR::e2MeshShaderBitNV): return "e2MeshShaderBitNV";
-        case(VkPipelineStageFlagBits2KHR::e2SubpassShadingBitHUAWEI): return "e2SubpassShadingBitHUAWEI";
-        case(VkPipelineStageFlagBits2KHR::e2InvocationMaskBitHUAWEI): return "e2InvocationMaskBitHUAWEI";
+        case(VkPipelineStageFlagBits2::Stage2None): return "Stage2None";
+        case(VkPipelineStageFlagBits2::Stage2TopOfPipe): return "Stage2TopOfPipe";
+        case(VkPipelineStageFlagBits2::Stage2DrawIndirect): return "Stage2DrawIndirect";
+        case(VkPipelineStageFlagBits2::Stage2VertexInput): return "Stage2VertexInput";
+        case(VkPipelineStageFlagBits2::Stage2VertexShader): return "Stage2VertexShader";
+        case(VkPipelineStageFlagBits2::Stage2TessellationControlShader): return "Stage2TessellationControlShader";
+        case(VkPipelineStageFlagBits2::Stage2TessellationEvaluationShader): return "Stage2TessellationEvaluationShader";
+        case(VkPipelineStageFlagBits2::Stage2GeometryShader): return "Stage2GeometryShader";
+        case(VkPipelineStageFlagBits2::Stage2FragmentShader): return "Stage2FragmentShader";
+        case(VkPipelineStageFlagBits2::Stage2EarlyFragmentTests): return "Stage2EarlyFragmentTests";
+        case(VkPipelineStageFlagBits2::Stage2LateFragmentTests): return "Stage2LateFragmentTests";
+        case(VkPipelineStageFlagBits2::Stage2ColorAttachmentOutput): return "Stage2ColorAttachmentOutput";
+        case(VkPipelineStageFlagBits2::Stage2ComputeShader): return "Stage2ComputeShader";
+        case(VkPipelineStageFlagBits2::Stage2AllTransfer): return "Stage2AllTransfer";
+        case(VkPipelineStageFlagBits2::Stage2BottomOfPipe): return "Stage2BottomOfPipe";
+        case(VkPipelineStageFlagBits2::Stage2Host): return "Stage2Host";
+        case(VkPipelineStageFlagBits2::Stage2AllGraphics): return "Stage2AllGraphics";
+        case(VkPipelineStageFlagBits2::Stage2AllCommands): return "Stage2AllCommands";
+        case(VkPipelineStageFlagBits2::Stage2Copy): return "Stage2Copy";
+        case(VkPipelineStageFlagBits2::Stage2Resolve): return "Stage2Resolve";
+        case(VkPipelineStageFlagBits2::Stage2Blit): return "Stage2Blit";
+        case(VkPipelineStageFlagBits2::Stage2Clear): return "Stage2Clear";
+        case(VkPipelineStageFlagBits2::Stage2IndexInput): return "Stage2IndexInput";
+        case(VkPipelineStageFlagBits2::Stage2VertexAttributeInput): return "Stage2VertexAttributeInput";
+        case(VkPipelineStageFlagBits2::Stage2PreRasterizationShaders): return "Stage2PreRasterizationShaders";
+        case(VkPipelineStageFlagBits2::Stage2VideoDecodeBitKHR): return "Stage2VideoDecodeBitKHR";
+        case(VkPipelineStageFlagBits2::Stage2VideoEncodeBitKHR): return "Stage2VideoEncodeBitKHR";
+        case(VkPipelineStageFlagBits2::Stage2TransformFeedbackBitEXT): return "Stage2TransformFeedbackBitEXT";
+        case(VkPipelineStageFlagBits2::Stage2ConditionalRenderingBitEXT): return "Stage2ConditionalRenderingBitEXT";
+        case(VkPipelineStageFlagBits2::Stage2CommandPreprocessBitNV): return "Stage2CommandPreprocessBitNV";
+        case(VkPipelineStageFlagBits2::Stage2FragmentShadingRateAttachmentBitKHR): return "Stage2FragmentShadingRateAttachmentBitKHR";
+        case(VkPipelineStageFlagBits2::Stage2AccelerationStructureBuildBitKHR): return "Stage2AccelerationStructureBuildBitKHR";
+        case(VkPipelineStageFlagBits2::Stage2RayTracingShaderBitKHR): return "Stage2RayTracingShaderBitKHR";
+        case(VkPipelineStageFlagBits2::Stage2FragmentDensityProcessBitEXT): return "Stage2FragmentDensityProcessBitEXT";
+        case(VkPipelineStageFlagBits2::Stage2TaskShaderBitNV): return "Stage2TaskShaderBitNV";
+        case(VkPipelineStageFlagBits2::Stage2MeshShaderBitNV): return "Stage2MeshShaderBitNV";
+        case(VkPipelineStageFlagBits2::Stage2SubpassShadingBitHUAWEI): return "Stage2SubpassShadingBitHUAWEI";
+        case(VkPipelineStageFlagBits2::Stage2InvocationMaskBitHUAWEI): return "Stage2InvocationMaskBitHUAWEI";
         default: return "UNKNOWN";
     }
 }
-std::string to_string(VkPipelineStageFlags2KHR flag){
+std::string to_string(VkPipelineStageFlags2 flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkPipelineStageFlagBits2KHR::e2NoneKHR) out += "e2NoneKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2TopOfPipeBitKHR) out += "e2TopOfPipeBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2DrawIndirectBitKHR) out += "e2DrawIndirectBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2VertexInputBitKHR) out += "e2VertexInputBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2VertexShaderBitKHR) out += "e2VertexShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2TessellationControlShaderBitKHR) out += "e2TessellationControlShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2TessellationEvaluationShaderBitKHR) out += "e2TessellationEvaluationShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2GeometryShaderBitKHR) out += "e2GeometryShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2FragmentShaderBitKHR) out += "e2FragmentShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2EarlyFragmentTestsBitKHR) out += "e2EarlyFragmentTestsBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2LateFragmentTestsBitKHR) out += "e2LateFragmentTestsBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2ColorAttachmentOutputBitKHR) out += "e2ColorAttachmentOutputBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2ComputeShaderBitKHR) out += "e2ComputeShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2AllTransferBitKHR) out += "e2AllTransferBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2BottomOfPipeBitKHR) out += "e2BottomOfPipeBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2HostBitKHR) out += "e2HostBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2AllGraphicsBitKHR) out += "e2AllGraphicsBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2AllCommandsBitKHR) out += "e2AllCommandsBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2CopyBitKHR) out += "e2CopyBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2ResolveBitKHR) out += "e2ResolveBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2BlitBitKHR) out += "e2BlitBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2ClearBitKHR) out += "e2ClearBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2IndexInputBitKHR) out += "e2IndexInputBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2VertexAttributeInputBitKHR) out += "e2VertexAttributeInputBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2PreRasterizationShadersBitKHR) out += "e2PreRasterizationShadersBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2VideoDecodeBitKHR) out += "e2VideoDecodeBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2VideoEncodeBitKHR) out += "e2VideoEncodeBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2TransformFeedbackBitEXT) out += "e2TransformFeedbackBitEXT | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2ConditionalRenderingBitEXT) out += "e2ConditionalRenderingBitEXT | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2CommandPreprocessBitNV) out += "e2CommandPreprocessBitNV | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2FragmentShadingRateAttachmentBitKHR) out += "e2FragmentShadingRateAttachmentBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2AccelerationStructureBuildBitKHR) out += "e2AccelerationStructureBuildBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2RayTracingShaderBitKHR) out += "e2RayTracingShaderBitKHR | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2FragmentDensityProcessBitEXT) out += "e2FragmentDensityProcessBitEXT | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2TaskShaderBitNV) out += "e2TaskShaderBitNV | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2MeshShaderBitNV) out += "e2MeshShaderBitNV | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2SubpassShadingBitHUAWEI) out += "e2SubpassShadingBitHUAWEI | ";
-    if (flag & VkPipelineStageFlagBits2KHR::e2InvocationMaskBitHUAWEI) out += "e2InvocationMaskBitHUAWEI | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2None) out += "Stage2None | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2TopOfPipe) out += "Stage2TopOfPipe | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2DrawIndirect) out += "Stage2DrawIndirect | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2VertexInput) out += "Stage2VertexInput | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2VertexShader) out += "Stage2VertexShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2TessellationControlShader) out += "Stage2TessellationControlShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2TessellationEvaluationShader) out += "Stage2TessellationEvaluationShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2GeometryShader) out += "Stage2GeometryShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2FragmentShader) out += "Stage2FragmentShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2EarlyFragmentTests) out += "Stage2EarlyFragmentTests | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2LateFragmentTests) out += "Stage2LateFragmentTests | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2ColorAttachmentOutput) out += "Stage2ColorAttachmentOutput | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2ComputeShader) out += "Stage2ComputeShader | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2AllTransfer) out += "Stage2AllTransfer | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2BottomOfPipe) out += "Stage2BottomOfPipe | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2Host) out += "Stage2Host | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2AllGraphics) out += "Stage2AllGraphics | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2AllCommands) out += "Stage2AllCommands | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2Copy) out += "Stage2Copy | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2Resolve) out += "Stage2Resolve | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2Blit) out += "Stage2Blit | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2Clear) out += "Stage2Clear | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2IndexInput) out += "Stage2IndexInput | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2VertexAttributeInput) out += "Stage2VertexAttributeInput | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2PreRasterizationShaders) out += "Stage2PreRasterizationShaders | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2VideoDecodeBitKHR) out += "Stage2VideoDecodeBitKHR | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2VideoEncodeBitKHR) out += "Stage2VideoEncodeBitKHR | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2TransformFeedbackBitEXT) out += "Stage2TransformFeedbackBitEXT | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2ConditionalRenderingBitEXT) out += "Stage2ConditionalRenderingBitEXT | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2CommandPreprocessBitNV) out += "Stage2CommandPreprocessBitNV | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2FragmentShadingRateAttachmentBitKHR) out += "Stage2FragmentShadingRateAttachmentBitKHR | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2AccelerationStructureBuildBitKHR) out += "Stage2AccelerationStructureBuildBitKHR | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2RayTracingShaderBitKHR) out += "Stage2RayTracingShaderBitKHR | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2FragmentDensityProcessBitEXT) out += "Stage2FragmentDensityProcessBitEXT | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2TaskShaderBitNV) out += "Stage2TaskShaderBitNV | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2MeshShaderBitNV) out += "Stage2MeshShaderBitNV | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2SubpassShadingBitHUAWEI) out += "Stage2SubpassShadingBitHUAWEI | ";
+    if (flag & VkPipelineStageFlagBits2::Stage2InvocationMaskBitHUAWEI) out += "Stage2InvocationMaskBitHUAWEI | ";
     return out.substr(0, out.size() - 3);
 }
-const char * to_string(VkSubmitFlagBitsKHR val) {
+const char * to_string(VkSubmitFlagBits val) {
     switch(val) {
-        case(VkSubmitFlagBitsKHR::ProtectedBitKHR): return "ProtectedBitKHR";
+        case(VkSubmitFlagBits::Protected): return "Protected";
         default: return "UNKNOWN";
     }
 }
-std::string to_string(VkSubmitFlagsKHR flag){
+std::string to_string(VkSubmitFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkSubmitFlagBitsKHR::ProtectedBitKHR) out += "ProtectedBitKHR | ";
+    if (flag & VkSubmitFlagBits::Protected) out += "Protected | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkEventCreateFlagBits val) {
     switch(val) {
-        case(VkEventCreateFlagBits::DeviceOnlyBitKHR): return "DeviceOnlyBitKHR";
+        case(VkEventCreateFlagBits::DeviceOnly): return "DeviceOnly";
         default: return "UNKNOWN";
     }
 }
 std::string to_string(VkEventCreateFlags flag){
     if (flag.flags == 0) return "None";
     std::string out;
-    if (flag & VkEventCreateFlagBits::DeviceOnlyBitKHR) out += "DeviceOnlyBitKHR | ";
+    if (flag & VkEventCreateFlagBits::DeviceOnly) out += "DeviceOnly | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkPipelineLayoutCreateFlagBits val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
 std::string to_string(VkPipelineLayoutCreateFlags flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
+const char * to_string(VkPipelineColorBlendStateCreateFlagBits val) {
+    switch(val) {
+        case(VkPipelineColorBlendStateCreateFlagBits::RasterizationOrderAttachmentAccessBitARM): return "RasterizationOrderAttachmentAccessBitARM";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkPipelineColorBlendStateCreateFlags flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkPipelineColorBlendStateCreateFlagBits::RasterizationOrderAttachmentAccessBitARM) out += "RasterizationOrderAttachmentAccessBitARM | ";
+    return out.substr(0, out.size() - 3);
+}
+const char * to_string(VkPipelineDepthStencilStateCreateFlagBits val) {
+    switch(val) {
+        case(VkPipelineDepthStencilStateCreateFlagBits::RasterizationOrderAttachmentDepthAccessBitARM): return "RasterizationOrderAttachmentDepthAccessBitARM";
+        case(VkPipelineDepthStencilStateCreateFlagBits::RasterizationOrderAttachmentStencilAccessBitARM): return "RasterizationOrderAttachmentStencilAccessBitARM";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkPipelineDepthStencilStateCreateFlags flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkPipelineDepthStencilStateCreateFlagBits::RasterizationOrderAttachmentDepthAccessBitARM) out += "RasterizationOrderAttachmentDepthAccessBitARM | ";
+    if (flag & VkPipelineDepthStencilStateCreateFlagBits::RasterizationOrderAttachmentStencilAccessBitARM) out += "RasterizationOrderAttachmentStencilAccessBitARM | ";
+    return out.substr(0, out.size() - 3);
+}
 #if defined(VK_ENABLE_BETA_EXTENSIONS)
 const char * to_string(VkVideoCodecOperationFlagBitsKHR val) {
     switch(val) {
         case(VkVideoCodecOperationFlagBitsKHR::InvalidBitKHR): return "InvalidBitKHR";
         case(VkVideoCodecOperationFlagBitsKHR::EncodeH264BitEXT): return "EncodeH264BitEXT";
+        case(VkVideoCodecOperationFlagBitsKHR::EncodeH265BitEXT): return "EncodeH265BitEXT";
         case(VkVideoCodecOperationFlagBitsKHR::DecodeH264BitEXT): return "DecodeH264BitEXT";
         case(VkVideoCodecOperationFlagBitsKHR::DecodeH265BitEXT): return "DecodeH265BitEXT";
         default: return "UNKNOWN";
@@ -3826,6 +3915,7 @@ std::string to_string(VkVideoCodecOperationFlagsKHR flag){
     std::string out;
     if (flag & VkVideoCodecOperationFlagBitsKHR::InvalidBitKHR) out += "InvalidBitKHR | ";
     if (flag & VkVideoCodecOperationFlagBitsKHR::EncodeH264BitEXT) out += "EncodeH264BitEXT | ";
+    if (flag & VkVideoCodecOperationFlagBitsKHR::EncodeH265BitEXT) out += "EncodeH265BitEXT | ";
     if (flag & VkVideoCodecOperationFlagBitsKHR::DecodeH264BitEXT) out += "DecodeH264BitEXT | ";
     if (flag & VkVideoCodecOperationFlagBitsKHR::DecodeH265BitEXT) out += "DecodeH265BitEXT | ";
     return out.substr(0, out.size() - 3);
@@ -3973,7 +4063,7 @@ std::string to_string(VkVideoEncodeFlagsKHR flag){
 const char * to_string(VkVideoEncodeRateControlFlagBitsKHR val) {
     switch(val) {
         case(VkVideoEncodeRateControlFlagBitsKHR::DefaultKHR): return "DefaultKHR";
-        case(VkVideoEncodeRateControlFlagBitsKHR::ResetBitKHR): return "ResetBitKHR";
+        case(VkVideoEncodeRateControlFlagBitsKHR::Reserved0BitKHR): return "Reserved0BitKHR";
         default: return "UNKNOWN";
     }
 }
@@ -3981,7 +4071,7 @@ std::string to_string(VkVideoEncodeRateControlFlagsKHR flag){
     if (flag.flags == 0) return "None";
     std::string out;
     if (flag & VkVideoEncodeRateControlFlagBitsKHR::DefaultKHR) out += "DefaultKHR | ";
-    if (flag & VkVideoEncodeRateControlFlagBitsKHR::ResetBitKHR) out += "ResetBitKHR | ";
+    if (flag & VkVideoEncodeRateControlFlagBitsKHR::Reserved0BitKHR) out += "Reserved0BitKHR | ";
     return out.substr(0, out.size() - 3);
 }
 const char * to_string(VkVideoEncodeRateControlModeFlagBitsKHR val) {
@@ -4078,10 +4168,26 @@ std::string to_string(VkVideoEncodeH264CreateFlagsEXT flag){
     if (flag & VkVideoEncodeH264CreateFlagBitsEXT::Reserved0BitEXT) out += "Reserved0BitEXT | ";
     return out.substr(0, out.size() - 3);
 }
+const char * to_string(VkVideoEncodeH264RateControlStructureFlagBitsEXT val) {
+    switch(val) {
+        case(VkVideoEncodeH264RateControlStructureFlagBitsEXT::UnknownEXT): return "UnknownEXT";
+        case(VkVideoEncodeH264RateControlStructureFlagBitsEXT::FlatBitEXT): return "FlatBitEXT";
+        case(VkVideoEncodeH264RateControlStructureFlagBitsEXT::DyadicBitEXT): return "DyadicBitEXT";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkVideoEncodeH264RateControlStructureFlagsEXT flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkVideoEncodeH264RateControlStructureFlagBitsEXT::UnknownEXT) out += "UnknownEXT | ";
+    if (flag & VkVideoEncodeH264RateControlStructureFlagBitsEXT::FlatBitEXT) out += "FlatBitEXT | ";
+    if (flag & VkVideoEncodeH264RateControlStructureFlagBitsEXT::DyadicBitEXT) out += "DyadicBitEXT | ";
+    return out.substr(0, out.size() - 3);
+}
 #endif // defined(VK_ENABLE_BETA_EXTENSIONS)
-#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageFormatConstraintsFlagBitsFUCHSIA val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
 std::string to_string(VkImageFormatConstraintsFlagsFUCHSIA flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
+#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageConstraintsInfoFlagBitsFUCHSIA val) {
     switch(val) {
         case(VkImageConstraintsInfoFlagBitsFUCHSIA::CpuReadRarelyFUCHSIA): return "CpuReadRarelyFUCHSIA";
@@ -4103,6 +4209,170 @@ std::string to_string(VkImageConstraintsInfoFlagsFUCHSIA flag){
     return out.substr(0, out.size() - 3);
 }
 #endif // defined(VK_USE_PLATFORM_FUCHSIA)
+const char * to_string(VkFormatFeatureFlagBits2 val) {
+    switch(val) {
+        case(VkFormatFeatureFlagBits2::Feature2SampledImage): return "Feature2SampledImage";
+        case(VkFormatFeatureFlagBits2::Feature2StorageImage): return "Feature2StorageImage";
+        case(VkFormatFeatureFlagBits2::Feature2StorageImageAtomic): return "Feature2StorageImageAtomic";
+        case(VkFormatFeatureFlagBits2::Feature2UniformTexelBuffer): return "Feature2UniformTexelBuffer";
+        case(VkFormatFeatureFlagBits2::Feature2StorageTexelBuffer): return "Feature2StorageTexelBuffer";
+        case(VkFormatFeatureFlagBits2::Feature2StorageTexelBufferAtomic): return "Feature2StorageTexelBufferAtomic";
+        case(VkFormatFeatureFlagBits2::Feature2VertexBuffer): return "Feature2VertexBuffer";
+        case(VkFormatFeatureFlagBits2::Feature2ColorAttachment): return "Feature2ColorAttachment";
+        case(VkFormatFeatureFlagBits2::Feature2ColorAttachmentBlend): return "Feature2ColorAttachmentBlend";
+        case(VkFormatFeatureFlagBits2::Feature2DepthStencilAttachment): return "Feature2DepthStencilAttachment";
+        case(VkFormatFeatureFlagBits2::Feature2BlitSrc): return "Feature2BlitSrc";
+        case(VkFormatFeatureFlagBits2::Feature2BlitDst): return "Feature2BlitDst";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageFilterLinear): return "Feature2SampledImageFilterLinear";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageFilterCubic): return "Feature2SampledImageFilterCubic";
+        case(VkFormatFeatureFlagBits2::Feature2TransferSrc): return "Feature2TransferSrc";
+        case(VkFormatFeatureFlagBits2::Feature2TransferDst): return "Feature2TransferDst";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageFilterMinmax): return "Feature2SampledImageFilterMinmax";
+        case(VkFormatFeatureFlagBits2::Feature2MidpointChromaSamples): return "Feature2MidpointChromaSamples";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionLinearFilter): return "Feature2SampledImageYcbcrConversionLinearFilter";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionSeparateReconstructionFilter): return "Feature2SampledImageYcbcrConversionSeparateReconstructionFilter";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionChromaReconstructionExplicit): return "Feature2SampledImageYcbcrConversionChromaReconstructionExplicit";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionChromaReconstructionExplicitForceable): return "Feature2SampledImageYcbcrConversionChromaReconstructionExplicitForceable";
+        case(VkFormatFeatureFlagBits2::Feature2Disjoint): return "Feature2Disjoint";
+        case(VkFormatFeatureFlagBits2::Feature2CositedChromaSamples): return "Feature2CositedChromaSamples";
+        case(VkFormatFeatureFlagBits2::Feature2StorageReadWithoutFormat): return "Feature2StorageReadWithoutFormat";
+        case(VkFormatFeatureFlagBits2::Feature2StorageWriteWithoutFormat): return "Feature2StorageWriteWithoutFormat";
+        case(VkFormatFeatureFlagBits2::Feature2SampledImageDepthComparison): return "Feature2SampledImageDepthComparison";
+        case(VkFormatFeatureFlagBits2::Feature2VideoDecodeOutputBitKHR): return "Feature2VideoDecodeOutputBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2VideoDecodeDpbBitKHR): return "Feature2VideoDecodeDpbBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2AccelerationStructureVertexBufferBitKHR): return "Feature2AccelerationStructureVertexBufferBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2FragmentDensityMapBitEXT): return "Feature2FragmentDensityMapBitEXT";
+        case(VkFormatFeatureFlagBits2::Feature2FragmentShadingRateAttachmentBitKHR): return "Feature2FragmentShadingRateAttachmentBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2VideoEncodeInputBitKHR): return "Feature2VideoEncodeInputBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2VideoEncodeDpbBitKHR): return "Feature2VideoEncodeDpbBitKHR";
+        case(VkFormatFeatureFlagBits2::Feature2LinearColorAttachmentBitNV): return "Feature2LinearColorAttachmentBitNV";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkFormatFeatureFlags2 flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImage) out += "Feature2SampledImage | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageImage) out += "Feature2StorageImage | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageImageAtomic) out += "Feature2StorageImageAtomic | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2UniformTexelBuffer) out += "Feature2UniformTexelBuffer | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageTexelBuffer) out += "Feature2StorageTexelBuffer | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageTexelBufferAtomic) out += "Feature2StorageTexelBufferAtomic | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2VertexBuffer) out += "Feature2VertexBuffer | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2ColorAttachment) out += "Feature2ColorAttachment | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2ColorAttachmentBlend) out += "Feature2ColorAttachmentBlend | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2DepthStencilAttachment) out += "Feature2DepthStencilAttachment | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2BlitSrc) out += "Feature2BlitSrc | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2BlitDst) out += "Feature2BlitDst | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageFilterLinear) out += "Feature2SampledImageFilterLinear | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageFilterCubic) out += "Feature2SampledImageFilterCubic | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2TransferSrc) out += "Feature2TransferSrc | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2TransferDst) out += "Feature2TransferDst | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageFilterMinmax) out += "Feature2SampledImageFilterMinmax | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2MidpointChromaSamples) out += "Feature2MidpointChromaSamples | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionLinearFilter) out += "Feature2SampledImageYcbcrConversionLinearFilter | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionSeparateReconstructionFilter) out += "Feature2SampledImageYcbcrConversionSeparateReconstructionFilter | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionChromaReconstructionExplicit) out += "Feature2SampledImageYcbcrConversionChromaReconstructionExplicit | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageYcbcrConversionChromaReconstructionExplicitForceable) out += "Feature2SampledImageYcbcrConversionChromaReconstructionExplicitForceable | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2Disjoint) out += "Feature2Disjoint | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2CositedChromaSamples) out += "Feature2CositedChromaSamples | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageReadWithoutFormat) out += "Feature2StorageReadWithoutFormat | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2StorageWriteWithoutFormat) out += "Feature2StorageWriteWithoutFormat | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2SampledImageDepthComparison) out += "Feature2SampledImageDepthComparison | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2VideoDecodeOutputBitKHR) out += "Feature2VideoDecodeOutputBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2VideoDecodeDpbBitKHR) out += "Feature2VideoDecodeDpbBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2AccelerationStructureVertexBufferBitKHR) out += "Feature2AccelerationStructureVertexBufferBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2FragmentDensityMapBitEXT) out += "Feature2FragmentDensityMapBitEXT | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2FragmentShadingRateAttachmentBitKHR) out += "Feature2FragmentShadingRateAttachmentBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2VideoEncodeInputBitKHR) out += "Feature2VideoEncodeInputBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2VideoEncodeDpbBitKHR) out += "Feature2VideoEncodeDpbBitKHR | ";
+    if (flag & VkFormatFeatureFlagBits2::Feature2LinearColorAttachmentBitNV) out += "Feature2LinearColorAttachmentBitNV | ";
+    return out.substr(0, out.size() - 3);
+}
+const char * to_string(VkRenderingFlagBits val) {
+    switch(val) {
+        case(VkRenderingFlagBits::ContentsSecondaryCommandBuffers): return "ContentsSecondaryCommandBuffers";
+        case(VkRenderingFlagBits::Suspending): return "Suspending";
+        case(VkRenderingFlagBits::Resuming): return "Resuming";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkRenderingFlags flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkRenderingFlagBits::ContentsSecondaryCommandBuffers) out += "ContentsSecondaryCommandBuffers | ";
+    if (flag & VkRenderingFlagBits::Suspending) out += "Suspending | ";
+    if (flag & VkRenderingFlagBits::Resuming) out += "Resuming | ";
+    return out.substr(0, out.size() - 3);
+}
+#if defined(VK_ENABLE_BETA_EXTENSIONS)
+const char * to_string(VkVideoEncodeH265InputModeFlagBitsEXT val) {
+    switch(val) {
+        case(VkVideoEncodeH265InputModeFlagBitsEXT::FrameBitEXT): return "FrameBitEXT";
+        case(VkVideoEncodeH265InputModeFlagBitsEXT::SliceBitEXT): return "SliceBitEXT";
+        case(VkVideoEncodeH265InputModeFlagBitsEXT::NonVclBitEXT): return "NonVclBitEXT";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkVideoEncodeH265InputModeFlagsEXT flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkVideoEncodeH265InputModeFlagBitsEXT::FrameBitEXT) out += "FrameBitEXT | ";
+    if (flag & VkVideoEncodeH265InputModeFlagBitsEXT::SliceBitEXT) out += "SliceBitEXT | ";
+    if (flag & VkVideoEncodeH265InputModeFlagBitsEXT::NonVclBitEXT) out += "NonVclBitEXT | ";
+    return out.substr(0, out.size() - 3);
+}
+const char * to_string(VkVideoEncodeH265OutputModeFlagBitsEXT val) {
+    switch(val) {
+        case(VkVideoEncodeH265OutputModeFlagBitsEXT::FrameBitEXT): return "FrameBitEXT";
+        case(VkVideoEncodeH265OutputModeFlagBitsEXT::SliceBitEXT): return "SliceBitEXT";
+        case(VkVideoEncodeH265OutputModeFlagBitsEXT::NonVclBitEXT): return "NonVclBitEXT";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkVideoEncodeH265OutputModeFlagsEXT flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkVideoEncodeH265OutputModeFlagBitsEXT::FrameBitEXT) out += "FrameBitEXT | ";
+    if (flag & VkVideoEncodeH265OutputModeFlagBitsEXT::SliceBitEXT) out += "SliceBitEXT | ";
+    if (flag & VkVideoEncodeH265OutputModeFlagBitsEXT::NonVclBitEXT) out += "NonVclBitEXT | ";
+    return out.substr(0, out.size() - 3);
+}
+const char * to_string(VkVideoEncodeH265CtbSizeFlagBitsEXT val) {
+    switch(val) {
+        case(VkVideoEncodeH265CtbSizeFlagBitsEXT::e8BitEXT): return "e8BitEXT";
+        case(VkVideoEncodeH265CtbSizeFlagBitsEXT::e16BitEXT): return "e16BitEXT";
+        case(VkVideoEncodeH265CtbSizeFlagBitsEXT::e32BitEXT): return "e32BitEXT";
+        case(VkVideoEncodeH265CtbSizeFlagBitsEXT::e64BitEXT): return "e64BitEXT";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkVideoEncodeH265CtbSizeFlagsEXT flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkVideoEncodeH265CtbSizeFlagBitsEXT::e8BitEXT) out += "e8BitEXT | ";
+    if (flag & VkVideoEncodeH265CtbSizeFlagBitsEXT::e16BitEXT) out += "e16BitEXT | ";
+    if (flag & VkVideoEncodeH265CtbSizeFlagBitsEXT::e32BitEXT) out += "e32BitEXT | ";
+    if (flag & VkVideoEncodeH265CtbSizeFlagBitsEXT::e64BitEXT) out += "e64BitEXT | ";
+    return out.substr(0, out.size() - 3);
+}
+const char * to_string(VkVideoEncodeH265RateControlStructureFlagBitsEXT val) {
+    switch(val) {
+        case(VkVideoEncodeH265RateControlStructureFlagBitsEXT::UnknownEXT): return "UnknownEXT";
+        case(VkVideoEncodeH265RateControlStructureFlagBitsEXT::FlatBitEXT): return "FlatBitEXT";
+        case(VkVideoEncodeH265RateControlStructureFlagBitsEXT::DyadicBitEXT): return "DyadicBitEXT";
+        default: return "UNKNOWN";
+    }
+}
+std::string to_string(VkVideoEncodeH265RateControlStructureFlagsEXT flag){
+    if (flag.flags == 0) return "None";
+    std::string out;
+    if (flag & VkVideoEncodeH265RateControlStructureFlagBitsEXT::UnknownEXT) out += "UnknownEXT | ";
+    if (flag & VkVideoEncodeH265RateControlStructureFlagBitsEXT::FlatBitEXT) out += "FlatBitEXT | ";
+    if (flag & VkVideoEncodeH265RateControlStructureFlagBitsEXT::DyadicBitEXT) out += "DyadicBitEXT | ";
+    return out.substr(0, out.size() - 3);
+}
+#endif // defined(VK_ENABLE_BETA_EXTENSIONS)
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 #endif // defined(VK_USE_PLATFORM_ANDROID_KHR)
 #if defined(VK_USE_PLATFORM_VI_NN)

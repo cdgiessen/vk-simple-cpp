@@ -31,7 +31,7 @@ if (VK_SIMPLE_CPP_GENERATE_SOURCE OR VK_SIMPLE_CPP_SAMPLES OR VK_SIMPLE_CPP_TEST
     FetchContent_Declare(
         vulkan_headers
         GIT_REPOSITORY https://github.com/KhronosGroup/Vulkan-Headers
-        GIT_TAG        v1.2.194
+        GIT_TAG        v1.3.204
     )
     FetchContent_GetProperties(vulkan-headers)
     if(NOT vulkan_headers_POPULATED)

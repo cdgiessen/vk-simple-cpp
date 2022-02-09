@@ -62,7 +62,7 @@ const char * to_string(VkCoverageModulationModeNV val);
 const char * to_string(VkCoverageReductionModeNV val);
 const char * to_string(VkValidationCacheHeaderVersionEXT val);
 const char * to_string(VkShaderInfoTypeAMD val);
-const char * to_string(VkQueueGlobalPriorityEXT val);
+const char * to_string(VkQueueGlobalPriorityKHR val);
 const char * to_string(VkTimeDomainEXT val);
 const char * to_string(VkConservativeRasterizationModeEXT val);
 const char * to_string(VkSemaphoreType val);
@@ -215,8 +215,8 @@ const char * to_string(VkIndirectCommandsLayoutUsageFlagBitsNV val);
 std::string to_string(VkIndirectCommandsLayoutUsageFlagsNV flag);
 const char * to_string(VkIndirectStateFlagBitsNV val);
 std::string to_string(VkIndirectStateFlagsNV flag);
-const char * to_string(VkPrivateDataSlotCreateFlagBitsEXT val);
-std::string to_string(VkPrivateDataSlotCreateFlagsEXT flag);
+const char * to_string(VkPrivateDataSlotCreateFlagBits val);
+std::string to_string(VkPrivateDataSlotCreateFlags flag);
 const char * to_string(VkDescriptorSetLayoutCreateFlagBits val);
 std::string to_string(VkDescriptorSetLayoutCreateFlags flag);
 const char * to_string(VkExternalMemoryHandleTypeFlagBits val);
@@ -269,8 +269,8 @@ const char * to_string(VkFramebufferCreateFlagBits val);
 std::string to_string(VkFramebufferCreateFlags flag);
 const char * to_string(VkDeviceDiagnosticsConfigFlagBitsNV val);
 std::string to_string(VkDeviceDiagnosticsConfigFlagsNV flag);
-const char * to_string(VkPipelineCreationFeedbackFlagBitsEXT val);
-std::string to_string(VkPipelineCreationFeedbackFlagsEXT flag);
+const char * to_string(VkPipelineCreationFeedbackFlagBits val);
+std::string to_string(VkPipelineCreationFeedbackFlags flag);
 const char * to_string(VkPerformanceCounterDescriptionFlagBitsKHR val);
 std::string to_string(VkPerformanceCounterDescriptionFlagsKHR flag);
 const char * to_string(VkAcquireProfilingLockFlagBitsKHR val);
@@ -281,18 +281,22 @@ const char * to_string(VkShaderModuleCreateFlagBits val);
 std::string to_string(VkShaderModuleCreateFlags flag);
 const char * to_string(VkPipelineCompilerControlFlagBitsAMD val);
 std::string to_string(VkPipelineCompilerControlFlagsAMD flag);
-const char * to_string(VkToolPurposeFlagBitsEXT val);
-std::string to_string(VkToolPurposeFlagsEXT flag);
-const char * to_string(VkAccessFlagBits2KHR val);
-std::string to_string(VkAccessFlags2KHR flag);
-const char * to_string(VkPipelineStageFlagBits2KHR val);
-std::string to_string(VkPipelineStageFlags2KHR flag);
-const char * to_string(VkSubmitFlagBitsKHR val);
-std::string to_string(VkSubmitFlagsKHR flag);
+const char * to_string(VkToolPurposeFlagBits val);
+std::string to_string(VkToolPurposeFlags flag);
+const char * to_string(VkAccessFlagBits2 val);
+std::string to_string(VkAccessFlags2 flag);
+const char * to_string(VkPipelineStageFlagBits2 val);
+std::string to_string(VkPipelineStageFlags2 flag);
+const char * to_string(VkSubmitFlagBits val);
+std::string to_string(VkSubmitFlags flag);
 const char * to_string(VkEventCreateFlagBits val);
 std::string to_string(VkEventCreateFlags flag);
 const char * to_string(VkPipelineLayoutCreateFlagBits val);
 std::string to_string(VkPipelineLayoutCreateFlags flag);
+const char * to_string(VkPipelineColorBlendStateCreateFlagBits val);
+std::string to_string(VkPipelineColorBlendStateCreateFlags flag);
+const char * to_string(VkPipelineDepthStencilStateCreateFlagBits val);
+std::string to_string(VkPipelineDepthStencilStateCreateFlags flag);
 #if defined(VK_ENABLE_BETA_EXTENSIONS)
 const char * to_string(VkVideoCodecOperationFlagBitsKHR val);
 std::string to_string(VkVideoCodecOperationFlagsKHR flag);
@@ -326,13 +330,29 @@ const char * to_string(VkVideoEncodeH264OutputModeFlagBitsEXT val);
 std::string to_string(VkVideoEncodeH264OutputModeFlagsEXT flag);
 const char * to_string(VkVideoEncodeH264CreateFlagBitsEXT val);
 std::string to_string(VkVideoEncodeH264CreateFlagsEXT flag);
+const char * to_string(VkVideoEncodeH264RateControlStructureFlagBitsEXT val);
+std::string to_string(VkVideoEncodeH264RateControlStructureFlagsEXT flag);
 #endif // defined(VK_ENABLE_BETA_EXTENSIONS)
-#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageFormatConstraintsFlagBitsFUCHSIA val);
 std::string to_string(VkImageFormatConstraintsFlagsFUCHSIA flag);
+#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageConstraintsInfoFlagBitsFUCHSIA val);
 std::string to_string(VkImageConstraintsInfoFlagsFUCHSIA flag);
 #endif // defined(VK_USE_PLATFORM_FUCHSIA)
+const char * to_string(VkFormatFeatureFlagBits2 val);
+std::string to_string(VkFormatFeatureFlags2 flag);
+const char * to_string(VkRenderingFlagBits val);
+std::string to_string(VkRenderingFlags flag);
+#if defined(VK_ENABLE_BETA_EXTENSIONS)
+const char * to_string(VkVideoEncodeH265InputModeFlagBitsEXT val);
+std::string to_string(VkVideoEncodeH265InputModeFlagsEXT flag);
+const char * to_string(VkVideoEncodeH265OutputModeFlagBitsEXT val);
+std::string to_string(VkVideoEncodeH265OutputModeFlagsEXT flag);
+const char * to_string(VkVideoEncodeH265CtbSizeFlagBitsEXT val);
+std::string to_string(VkVideoEncodeH265CtbSizeFlagsEXT flag);
+const char * to_string(VkVideoEncodeH265RateControlStructureFlagBitsEXT val);
+std::string to_string(VkVideoEncodeH265RateControlStructureFlagsEXT flag);
+#endif // defined(VK_ENABLE_BETA_EXTENSIONS)
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 #endif // defined(VK_USE_PLATFORM_ANDROID_KHR)
 #if defined(VK_USE_PLATFORM_VI_NN)
