@@ -100,8 +100,8 @@ add_library(vulkan-simple-cpp STATIC
 target_include_directories(vulkan-simple-cpp BEFORE PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 target_include_directories(vulkan-simple-cpp PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/vulkan)
 target_link_libraries(vulkan-simple-cpp PUBLIC vk-simple-cpp-compiler-options)
-target_compile_features(vulkan-simple-cpp PUBLIC cxx_std_11)
-set_target_properties(vulkan-simple-cpp PROPERTIES CXX_STANDARD 11)
+target_compile_features(vulkan-simple-cpp PUBLIC cxx_std_14)
+set_target_properties(vulkan-simple-cpp PROPERTIES CXX_STANDARD 14)
 set_target_properties(vulkan-simple-cpp PROPERTIES LINKER_LANGUAGE CXX)
 
 if (NOT WIN32)

@@ -404,7 +404,7 @@ void create_command_buffers(RendererContext& context)
     check_res(context->vkAllocateCommandBuffers(context, &alloc_info, context.cmd_buffers.data()),
               "Failed to create command buffers");
 
-    int i = 0;
+    size_t i = 0;
     for (auto& cmd_buf : context.cmd_buffers) {
 
         VkCommandBufferBeginInfo begin_info{};

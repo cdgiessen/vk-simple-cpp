@@ -79,6 +79,11 @@ class PlatformRequires:
         self.name = node.get('name')
         self.requires = node.get('requires')
 
+
+def platform_check(type_to_check, platform, extension_type_list):
+    if type_to_check.name in extension_type_list:
+        type_to_check.platform = platform
+
 class ApiConstant:
     def __init__(self, node):
         self.name = node.get('name')
@@ -86,7 +91,7 @@ class ApiConstant:
         self.alias = node.get('alias')
         self.type = node.get('type') if node.get('type') is not None else 'auto'
 
-    def print_basic(self, file):
+    def print(self, file):
         if self.alias is not None:
             file.write(f'constexpr {self.type} {self.name} = {self.alias};\n')
         elif self.value is not None:
@@ -110,7 +115,7 @@ class BaseType:
             if type_list[0] == 'struct':
                 pass
 
-    def print_basic(self, file):
+    def print(self, file):
         if self.type is not None:
             file.write(f'using {self.name} = {self.type};\n')
 
@@ -120,20 +125,6 @@ class MacroDefine:
         self.name = node.find("name")
         self.text = ''.join(node.itertext())
 
-    def print_base(self, file):
-        text = ''
-        should_print = True
-        for t in self.text.itertext():
-            if t in ['VK_API_VERSION', 'VK_API_VERSION_1_0', 'VK_API_VERSION_1_1', \
-                'VK_API_VERSION_1_2', 'VK_HEADER_VERSION', 'VK_HEADER_VERSION_COMPLETE']:
-                should_print = False
-            text += t
-        text += '\n'
-        if should_print:
-            file.write(text)
-
-    def get_text(self):
-        return self.text
 
 class Enum:
     def __init__(self, node):
@@ -154,15 +145,11 @@ class Enum:
             if elem.get('name') is not None and elem.get('value') is not None:
                 self.values[elem.get('name')] = elem.get('value')
 
-    def fill_ext_enums(self, enum_ext_list):
+    def fill(self, enum_ext_list):
         for ext_enum in enum_ext_list:
             self.values[ext_enum.name] = ext_enum.value
 
-    def check_platform(self, platform, ext_types):
-        if self.name in ext_types:
-            self.platform = platform
-
-    def print_basic(self, file):
+    def print(self, file):
         if self.alias is not None:
             file.write(f'using {self.name} = {self.alias};\n')
         else:
@@ -177,20 +164,20 @@ class Enum:
         if self.alias is not None:
             return
         if len(self.values) == 0:
-            file.write(f'inline const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "UNKNOWN"; }}\n')
+            file.write(f' const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "UNKNOWN"; }}\n')
             return
-        file.write(f'inline const char * to_string({self.name[2:]} val) {{\n')
+        file.write(f'const char * to_string({self.name[2:]} val) {{\n')
         file.write(f'    switch(val) {{\n')
         for name in self.values.keys():
             modified_name = MorphVkEnumName(name, self.enum_name_len)
             file.write(f'        case({self.name[2:]}::{modified_name}): return \"{modified_name}\";\n')
         file.write('        default: return "UNKNOWN";\n    }\n}\n')
 
-    def print_basic_string_forward_def(self, file):
+    def print_string_forward_def(self, file):
         if self.alias is None:
             file.write(f'const char * to_string({self.name} val);\n')
 
-    def print_basic_string_impl(self, file):
+    def print_string_impl(self, file):
         if self.alias is None:
             if len(self.values) == 0:
                 file.write(f'const char * to_string({self.name} val) {{ UNUSED_VARIABLE(val); return "UNKNOWN"; }}\n')
@@ -234,15 +221,12 @@ class Bitmask:
                 value = elem.get("alias")
             self.values[elem.get('name')] = value
 
-    def fill_ext_bitmasks(self, bitmask_ext_dict):
+    def fill(self, bitmask_ext_dict):
         for ext_bit in bitmask_ext_dict:
             self.values[ext_bit.name] = str(ext_bit.bitpos)
 
-    def check_platform(self, platform, ext_types):
-        if self.name in ext_types:
-            self.platform = platform
 
-    def print_basic(self, file):
+    def print(self, file):
         if self.alias is not None:
             file.write(f'using {self.name} = {self.alias};\n')
         else:
@@ -260,10 +244,10 @@ class Bitmask:
     def print_string(self, file):
         if self.alias is None:
             if len(self.values) == 0:
-                file.write(f'inline const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "UNKNOWN"; }}\n')
-                file.write(f'inline std::string to_string([[maybe_unused]] {self.flags_name[2:]} flag){{ return "UNKNOWN"; }}\n')
+                file.write(f'const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "UNKNOWN"; }}\n')
+                file.write(f'std::string to_string([[maybe_unused]] {self.flags_name[2:]} flag){{ return "UNKNOWN"; }}\n')
                 return
-            file.write(f'inline const char * to_string({self.name[2:]} val) {{\n')
+            file.write(f'const char * to_string({self.name[2:]} val) {{\n')
             file.write('    switch(val) {\n')
             already_printed_bits = set()
             for name, bitpos in self.values.items():
@@ -276,7 +260,7 @@ class Bitmask:
                 already_printed_bits.add(bitpos)
 
             file.write('        default: return "UNKNOWN";\n    }\n}\n')
-            file.write(f'inline std::string to_string({self.flags_name[2:]} flag){{\n')
+            file.write(f'std::string to_string({self.flags_name[2:]} flag){{\n')
             file.write(f'    if (flag.flags == 0) return \"None\";\n')
             file.write(f'    std::string out;\n')
             for name, bitpos in self.values.items():
@@ -287,17 +271,17 @@ class Bitmask:
 
             file.write(f'    return out.substr(0, out.size() - 3);\n}}\n')
 
-    def print_basic_string_forward_def(self, file):
+    def print_string_forward_def(self, file):
         if self.alias is None:
             file.write(f'const char * to_string({self.name} val);\n')
             file.write(f'std::string to_string({self.flags_name} flag);\n')
 
 
-    def print_basic_string_impl(self, file):
+    def print_string_impl(self, file):
         if self.alias is None:
             if len(self.values) == 0:
                 file.write(f'const char * to_string({self.name} val) {{ UNUSED_VARIABLE(val); return "UNKNOWN"; }}\n')
-                file.write(f'inline std::string to_string({self.flags_name} flag){{ UNUSED_VARIABLE(flag); return "UNKNOWN"; }}\n')
+                file.write(f'std::string to_string({self.flags_name} flag){{ UNUSED_VARIABLE(flag); return "UNKNOWN"; }}\n')
                 return
             file.write(f'const char * to_string({self.name} val) {{\n')
             file.write('    switch(val) {\n')
@@ -322,40 +306,30 @@ class Bitmask:
                 file.write(f'    if (flag & {self.name}::{modified_name}) out += \"{modified_name} | \";\n')
             file.write(f'    return out.substr(0, out.size() - 3);\n}}\n')
 
-    def print_c_interop(self, file):
-        if self.alias is None:
-            file.write(f'constexpr {self.name} to_c({self.name[2:]} value) {{ return static_cast<{self.name}>(value);}}\n')
-            file.write(f'constexpr {self.name[2:]} from_c({self.name} value) {{ return static_cast<{self.name[2:]}>(value);}}\n')
 class EmptyBitmask:
     def __init__(self, name):
-        self.name = name
-        self.flags_name = self.name.replace('Bits', 's')
+        self.flag_bits_name = name
+        self.name = name.replace('Bits', 's')
         self.underlying_type = 'uint32_t'
         self.platform = None
 
-    def fill_ext_bitmasks(self, bitmask_ext_dict):
+    def fill(self, bitmask_ext_dict):
         pass
 
-    def check_platform(self, platform, ext_types):
-        if self.name in ext_types or self.flags_name in ext_types:
-            self.platform = platform
 
-    def print_basic(self, file):
-        file.write(f'enum class {self.name}: {self.underlying_type} {{ }};\n')
+    def print(self, file):
+        file.write(f'enum class {self.flag_bits_name}: {self.underlying_type} {{ }};\n')
 
     def print_string(self, file):
-        file.write(f'inline const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "Unknown"; }} \n')
-        file.write(f'inline std::string to_string({self.flags_name[2:]} flag){{\n')
+        file.write(f'const char * to_string([[maybe_unused]] {self.flag_bits_name[2:]} val) {{ return "Unknown"; }} \n')
+        file.write(f'std::string to_string({self.name[2:]} flag){{\n')
         file.write(f'    if (flag.flags == 0) return \"None\";\n')
         file.write(f'    return "Unknown";\n}}\n')
 
-    def print_basic_string_forward_def(self, file):
+    def print_string_forward_def(self, file):
         pass
 
-    def print_basic_string_impl(self, file):
-        pass
-
-    def print_c_interop(self, file):
+    def print_string_impl(self, file):
         pass
 
 class Flags:
@@ -369,26 +343,18 @@ class Flags:
             self.alias = node.get('alias')
             self.underlying_type = None
 
-        self.flags_name = self.name.replace('Flags', 'FlagBits')
+        self.flag_bits_name = self.name.replace('Flags', 'FlagBits')
         self.requires = node.get('requires')
         self.need_empty = False
         if self.alias is None and self.requires is None:
             self.need_empty = True
         self.platform = None
 
-    def check_platform(self, platform, ext_types):
-        if (self.alias is not None and self.alias in ext_types) or self.name in ext_types:
-            self.platform = platform
-
-    def print_basic(self, file):
+    def print(self, file):
         if self.alias is None:
-            file.write(f'DECLARE_ENUM_FLAG_OPERATORS({self.name}, {self.flags_name}, {self.underlying_type})\n')
+            file.write(f'DECLARE_ENUM_FLAG_OPERATORS({self.name}, {self.flag_bits_name}, {self.underlying_type})\n')
         else:
             file.write(f'using {self.name} = {self.alias};\n')
-
-    def print_c_interop(self, file):
-        if self.alias is None:
-            file.write(f'constexpr {self.name} to_c({self.name[2:]} value) {{ return static_cast<{self.name}>(value.flags);}}\n')
 
 class Handle:
     def __init__(self, node):
@@ -402,10 +368,6 @@ class Handle:
         if self.alias is not None:
             self.name = node.get('name')
         self.platform = None
-
-    def check_platform(self, platform, ext_types):
-        if self.name in ext_types:
-            self.platform = platform
 
     def print_vk_handle(self, file):
         if self.alias is None:
@@ -533,11 +495,7 @@ class Structure:
             self.members.append(Variable(member, handles, default_values))
 
 
-    def check_platform(self, platform, ext_types):
-        if self.name in ext_types or (self.alias is not None and self.alias in ext_types):
-            self.platform = platform
-
-    def print_basic(self, file):
+    def print(self, file):
         if self.alias is not None:
             file.write(f'using {self.name} = {self.alias};\n')
         else:
@@ -588,10 +546,6 @@ class Function:
         if len(self.parameters) > 0 and self.parameters[0].base_type in dispatchable_handles:
             self.dispatch_handle = self.parameters[0].base_type
 
-    def check_platform(self, platform, ext_functions):
-        if self.name in ext_functions:
-            self.platform = platform
-
     def print_pfn_variable_decl(self, file):
         file.write(f'    detail::{self.pfn_type} {self.pfn_name} = nullptr;\n')
 
@@ -615,7 +569,7 @@ class Function:
     def print_init_dispatch_table(self, file, dispatch_name):
         file.write(f'    table.{self.name} = reinterpret_cast<PFN_{self.name}>(vkGet{dispatch_name}ProcAddr({dispatch_name}, \"{self.name}\"));\n')
 
-    def print_basic_pfn_func_decl(self, file):
+    def print_pfn_func_decl(self, file):
         if self.alias is not None:
             file.write(f'using PFN_{self.name} = PFN_{self.alias};\n')
             return
@@ -641,7 +595,7 @@ class FuncPointer:
             t.replace('VkBool32', 'Bool32')
             self.text += TrimVkFromAll(t.replace('VkBool32', 'Bool32'))
 
-    def print_basic(self, file):
+    def print(self, file):
         file.write(self.raw_text + '\n')
 
 class ExtEnum:
@@ -705,22 +659,18 @@ class Requires:
             elif bitpos is not None:
                 AppendToDictOfLists(self.bitmask_dict, extends, ExtBitmask(name, 1 << int(bitpos)))
 
-    def fill_functions(self, functions):
+    def fill(self, enum_dict, bitmask_dict, functions):
+        for key in self.enum_dict.keys():
+            enum_dict[key].fill(self.enum_dict[key])
+        [bitmask_dict[key].fill(self.bitmask_dict[key]) for key in self.bitmask_dict.keys()]
         self.functions.extend([function for function in functions if function.name in self.commands])
 
-    def fill_enums(self, enum_dict):
-        for key in self.enum_dict.keys():
-            enum_dict[key].fill_ext_enums(self.enum_dict[key])
-
-    def fill_bitmasks(self, bitmask_dict):
-        [bitmask_dict[key].fill_ext_bitmasks(self.bitmask_dict[key]) for key in self.bitmask_dict.keys()]
-
     def check_platform(self, platform, enum_dict, flags_dict, bitmask_dict, structures, functions):
-        [enum.check_platform(platform, self.types) for enum in enum_dict.values()]
-        [flag.check_platform(platform, self.types) for flag in flags_dict.values()]
-        [bitmask.check_platform(platform, self.types) for bitmask in bitmask_dict.values()]
-        [struct.check_platform(platform, self.types) for struct in structures]
-        [function.check_platform(platform, self.commands) for function in functions]
+        [platform_check(enum, platform, self.types) for enum in enum_dict.values()]
+        [platform_check(flag, platform, self.types) for flag in flags_dict.values()]
+        [platform_check(bitmask, platform, self.types) for bitmask in bitmask_dict.values()]
+        [platform_check(struct, platform, self.types) for struct in structures]
+        [platform_check(function, platform, self.commands) for function in functions]
 
 class Extension:
     def __init__(self, node, platforms):
@@ -884,8 +834,8 @@ class BindingGenerator:
 
         # add in flags which have no bitmask
         for f in self.flags_dict.values():
-            if f.need_empty and f.flags_name not in self.bitmask_dict:
-                self.bitmask_dict[f.flags_name] = EmptyBitmask(f.flags_name)
+            if f.need_empty and f.flag_bits_name not in self.bitmask_dict:
+                self.bitmask_dict[f.flag_bits_name] = EmptyBitmask(f.flag_bits_name)
 
         for commands in root.findall('commands'):
             for command in commands.findall('command'):
@@ -900,9 +850,7 @@ class BindingGenerator:
                     for require in new_ext.requires:
                         require.check_platform(new_ext.platform, self.enum_dict, self.flags_dict, self.bitmask_dict,
                             self.structures, self.functions)
-                        require.fill_enums(self.enum_dict)
-                        require.fill_bitmasks(self.bitmask_dict)
-                        require.fill_functions(self.functions)
+                        require.fill(self.enum_dict, self.bitmask_dict, self.functions)
                     self.ext_list.append(new_ext)
                 elif new_ext.supported == 'disabled':
                     for require in new_ext.requires:
@@ -923,9 +871,7 @@ class BindingGenerator:
         for feature in root.findall('feature'):
             feat_level = VulkanFeatureLevel(feature)
             for require in feat_level.requires:
-                require.fill_enums(self.enum_dict)
-                require.fill_bitmasks(self.bitmask_dict)
-                require.fill_functions(self.functions)
+                require.fill(self.enum_dict, self.bitmask_dict, self.functions)
             self.vk_feature_levels.append(feat_level)
 
         features_and_extensions = self.vk_feature_levels
@@ -941,23 +887,23 @@ def print_bindings(bindings):
         vulkan_core.write(cpp_header_guard + '\n')
         vulkan_core.write(cpp_platform_headers + '\n')
         for macro in bindings.macro_defines:
-            vulkan_core.write(f'{macro.get_text()}\n\n')
-        PrintConsecutivePlatforms(vulkan_core, api_constants.values(), 'print_basic')
-        PrintConsecutivePlatforms(vulkan_core, bindings.base_types, 'print_basic')
+            vulkan_core.write(f'{macro.text}\n\n')
+        PrintConsecutivePlatforms(vulkan_core, api_constants.values(), 'print')
+        PrintConsecutivePlatforms(vulkan_core, bindings.base_types, 'print')
         for ext in bindings.ext_list:
             if ext.supported != "disabled":
                 vulkan_core.write(f'#define {ext.str_name} "{ext.name}"\n')
-        PrintConsecutivePlatforms(vulkan_core, bindings.enum_dict.values(), 'print_basic')
-        PrintConsecutivePlatforms(vulkan_core, bindings.bitmask_dict.values(), 'print_basic')
+        PrintConsecutivePlatforms(vulkan_core, bindings.enum_dict.values(), 'print')
+        PrintConsecutivePlatforms(vulkan_core, bindings.bitmask_dict.values(), 'print')
         vulkan_core.write(bitmask_flags_macro + '\n')
-        PrintConsecutivePlatforms(vulkan_core, bindings.flags_dict.values(), 'print_basic')
+        PrintConsecutivePlatforms(vulkan_core, bindings.flags_dict.values(), 'print')
         [ handle.print_vk_handle(vulkan_core) for handle in bindings.handles.values() ]
         vulkan_core.write('struct VkDebugUtilsMessengerCallbackDataEXT;\n')
         vulkan_core.write('struct VkDeviceMemoryReportCallbackDataEXT;\n')
         vulkan_core.write(begin_extern_c)
-        PrintConsecutivePlatforms(vulkan_core, bindings.func_pointers, 'print_basic')
-        PrintConsecutivePlatforms(vulkan_core, bindings.structures, 'print_basic')
-        PrintConsecutivePlatforms(vulkan_core, bindings.functions, 'print_basic_pfn_func_decl')
+        PrintConsecutivePlatforms(vulkan_core, bindings.func_pointers, 'print')
+        PrintConsecutivePlatforms(vulkan_core, bindings.structures, 'print')
+        PrintConsecutivePlatforms(vulkan_core, bindings.functions, 'print_pfn_func_decl')
         [ table.print_extern_decl(vulkan_core) for table in bindings.dispatch_tables ]
         for dispatch_table in bindings.dispatch_tables:
             if dispatch_table.name in ['Device']:
@@ -989,16 +935,16 @@ def print_bindings(bindings):
     with open(f'include/vulkan/vulkan_string.h', 'w') as vulkan_string:
         vulkan_string.write(license_header)
         vulkan_string.write('// clang-format off\n#pragma once\n#include "vulkan.h"\n#include <string>\n')
-        PrintConsecutivePlatforms(vulkan_string, bindings.enum_dict.values(), 'print_basic_string_forward_def')
-        PrintConsecutivePlatforms(vulkan_string, bindings.bitmask_dict.values(), 'print_basic_string_forward_def')
+        PrintConsecutivePlatforms(vulkan_string, bindings.enum_dict.values(), 'print_string_forward_def')
+        PrintConsecutivePlatforms(vulkan_string, bindings.bitmask_dict.values(), 'print_string_forward_def')
         vulkan_string.write('\n// clang-format on\n')
 
     with open(f'include/vulkan/vulkan_string.cpp', 'w') as vulkan_string_impl:
         vulkan_string_impl.write(license_header)
         vulkan_string_impl.write('// clang-format off\n#include "vulkan_string.h"\n')
         vulkan_string_impl.write('''#define UNUSED_VARIABLE(x) (void)(x)\n''')
-        PrintConsecutivePlatforms(vulkan_string_impl, bindings.enum_dict.values(), 'print_basic_string_impl')
-        PrintConsecutivePlatforms(vulkan_string_impl, bindings.bitmask_dict.values(), 'print_basic_string_impl')
+        PrintConsecutivePlatforms(vulkan_string_impl, bindings.enum_dict.values(), 'print_string_impl')
+        PrintConsecutivePlatforms(vulkan_string_impl, bindings.bitmask_dict.values(), 'print_string_impl')
         vulkan_string_impl.write('\n// clang-format on\n')
 
 def main():

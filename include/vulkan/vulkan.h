@@ -5100,13 +5100,13 @@ constexpr FLAG_TYPE operator~(FLAG_TYPE a) noexcept {                           
     return static_cast<FLAG_TYPE>(~a.flags);                                               \
 }                                                                                          \
 constexpr FLAG_TYPE& operator|=(FLAG_TYPE& a, FLAG_TYPE b) noexcept {                      \
-    return a.flags = (a.flags | b.flags), a;                                                                              \
+    a.flags = (a.flags | b.flags); return a;                                               \
 }                                                                                          \
 constexpr FLAG_TYPE& operator&=(FLAG_TYPE& a, FLAG_TYPE b) noexcept {                      \
-    return a.flags = (a.flags & b.flags), a;                                                                              \
+    a.flags = (a.flags & b.flags); return a;                                               \
 }                                                                                          \
 constexpr FLAG_TYPE operator^=(FLAG_TYPE& a, FLAG_TYPE b) noexcept {                       \
-    return  a.flags = (a.flags ^ b.flags), a;                                                                              \
+    a.flags = (a.flags ^ b.flags); return a;                                               \
 }                                                                                          \
 constexpr FLAG_TYPE operator|(FLAG_BITS a, FLAG_BITS b) noexcept {                         \
     return static_cast<FLAG_TYPE>(static_cast<BASE_TYPE>(a) | static_cast<BASE_TYPE>(b));  \
