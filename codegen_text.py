@@ -258,7 +258,7 @@ void vkInitializeInstanceFunctions(VkInstance instance);
 // Parameter:
 // VkDevice device
 // The VkDevice handle which the application has created. Must not be VK_NULL_HANDLE
-void vkInitializeGlobalDeviceFunctions(VkDevice device);
+void vkInitializeDeviceFunctions(VkDevice device);
 
 // Loads device functions into the provided VkDeviceDispatchTable
 //
