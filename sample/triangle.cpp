@@ -132,7 +132,7 @@ auto GetVector(F&& f, Ts&&... ts) -> std::vector<T>
 void create_renderer_context(RendererContext& context)
 {
 
-    check_res(vkInitializeLoaderLibrary(), "Failed to initialize the loader library");
+    check_res(vkSimpleCppInitializeLoaderLibrary(), "Failed to initialize the loader library");
 
     context.window = create_window_glfw("Sample Triangle", false);
     check_res(context.window != nullptr, "Failed to create glfw window");
@@ -156,7 +156,7 @@ void create_renderer_context(RendererContext& context)
 
     check_res(vkCreateInstance(&inst_info, nullptr, &context.instance), "Failed to init Vulkan Instance");
 
-    vkInitializeInstanceFunctions(context.instance);
+    vkSimpleCppInitializeInstanceFunctions(context.instance);
 
     context.surface = create_surface_glfw(context.instance, context.window);
     check_res(context.surface != VK_NULL_HANDLE, "Failed to create glfw surface");
@@ -185,7 +185,7 @@ void create_device_context(RendererContext& context)
     info.pQueueCreateInfos = &queue_infos;
     check_res(vkCreateDevice(context.physical_device, &info, nullptr, &context.device), "Failed to create a vulkan device");
 
-    vkInitializeDeviceDispatchTable(context.device, context.functions);
+    vkSimpleCppInitializeDeviceDispatchTable(context.device, context.functions);
 }
 
 void setup_queues(RendererContext& context)
@@ -536,6 +536,7 @@ void destroy_renderer(RendererContext& context)
 {
     vkDestroySurfaceKHR(context.instance, context.surface, nullptr);
     vkDestroyInstance(context.instance, nullptr);
+    vkSimpleCppCloseLoaderLibrary();
     destroy_window_glfw(context.window);
 }
 

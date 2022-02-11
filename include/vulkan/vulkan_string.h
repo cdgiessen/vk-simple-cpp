@@ -333,9 +333,9 @@ std::string to_string(VkVideoEncodeH264CreateFlagsEXT flag);
 const char * to_string(VkVideoEncodeH264RateControlStructureFlagBitsEXT val);
 std::string to_string(VkVideoEncodeH264RateControlStructureFlagsEXT flag);
 #endif // defined(VK_ENABLE_BETA_EXTENSIONS)
+#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageFormatConstraintsFlagBitsFUCHSIA val);
 std::string to_string(VkImageFormatConstraintsFlagsFUCHSIA flag);
-#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageConstraintsInfoFlagBitsFUCHSIA val);
 std::string to_string(VkImageConstraintsInfoFlagsFUCHSIA flag);
 #endif // defined(VK_USE_PLATFORM_FUCHSIA)

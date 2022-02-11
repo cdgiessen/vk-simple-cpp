@@ -81,6 +81,10 @@ class PlatformRequires:
 
 
 def platform_check(type_to_check, platform, extension_type_list):
+    if type(type_to_check) in [Bitmask, EmptyBitmask]:
+        if type_to_check.name in extension_type_list or type_to_check.flags_name in extension_type_list:
+            type_to_check.platform = platform
+
     if type_to_check.name in extension_type_list:
         type_to_check.platform = platform
 
@@ -308,8 +312,8 @@ class Bitmask:
 
 class EmptyBitmask:
     def __init__(self, name):
-        self.flag_bits_name = name
-        self.name = name.replace('Bits', 's')
+        self.name = name
+        self.flags_name = name.replace('Bits', 's')
         self.underlying_type = 'uint32_t'
         self.platform = None
 
@@ -318,11 +322,11 @@ class EmptyBitmask:
 
 
     def print(self, file):
-        file.write(f'enum class {self.flag_bits_name}: {self.underlying_type} {{ }};\n')
+        file.write(f'enum class {self.name}: {self.underlying_type} {{ }};\n')
 
     def print_string(self, file):
-        file.write(f'const char * to_string([[maybe_unused]] {self.flag_bits_name[2:]} val) {{ return "Unknown"; }} \n')
-        file.write(f'std::string to_string({self.name[2:]} flag){{\n')
+        file.write(f'const char * to_string([[maybe_unused]] {self.name[2:]} val) {{ return "Unknown"; }} \n')
+        file.write(f'std::string to_string({self.flags_name[2:]} flag){{\n')
         file.write(f'    if (flag.flags == 0) return \"None\";\n')
         file.write(f'    return "Unknown";\n}}\n')
 
@@ -720,7 +724,7 @@ class DispatchTable:
         PrintConsecutivePlatforms(file, self.functions.values(), 'print_function_def', self.dispatch_type)
 
     def print_init_global_functions(self, file):
-        file.write(f'void vkInitialize{self.name}Functions (Vk{self.name} {self.name}) {{\n')
+        file.write(f'void vkSimpleCppInitialize{self.name}Functions (Vk{self.name} {self.name}) {{\n')
         PrintConsecutivePlatforms(file, self.functions.values(), 'print_init_global_functions', self.name)
         file.write('};\n')
 
@@ -737,7 +741,7 @@ class DispatchTable:
         file.write('};\n')
 
     def print_init_dispatch_table(self, file):
-        file.write(f'void vkInitialize{self.name}DispatchTable (Vk{self.name} {self.name}, Vk{self.name}DispatchTable & table) {{\n')
+        file.write(f'void vkSimpleCppInitialize{self.name}DispatchTable (Vk{self.name} {self.name}, Vk{self.name}DispatchTable & table) {{\n')
         for function in self.functions.values():
             if function.platform is not None:
                 file.write(f'#if defined({function.platform})\n')

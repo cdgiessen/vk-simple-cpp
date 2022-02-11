@@ -230,13 +230,13 @@ cpp_footer  = '''
 //
 // Optional Parameter:
 // PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE
-VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE);
+VkResult vkSimpleCppInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE);
 
 // Close the Vulkan-Loader and assigns VK_NULL_HANDLE to vkGetInstanceProcAddr
 //
 // Note:
-// After this function is called, no further vulkan calls can be made, except for `vkInitializeLoaderLibrary()`
-void vkCloseLoaderLibrary();
+// After this function is called, no further vulkan calls can be made, except for `vkSimpleCppInitializeLoaderLibrary()`
+void vkSimpleCppCloseLoaderLibrary();
 
 // Initialize the instance and physical device functions into the global function pointers
 // (all functions which take a VkInstance or VkPhysicalDevice as the first parameter)
@@ -246,7 +246,7 @@ void vkCloseLoaderLibrary();
 // Parameter:
 // VkInstance instance
 // The VkInstance handle which the application has created. Must not be VK_NULL_HANDLE
-void vkInitializeInstanceFunctions(VkInstance instance);
+void vkSimpleCppInitializeInstanceFunctions(VkInstance instance);
 
 // Loads device functions into the global function pointers
 //
@@ -258,7 +258,7 @@ void vkInitializeInstanceFunctions(VkInstance instance);
 // Parameter:
 // VkDevice device
 // The VkDevice handle which the application has created. Must not be VK_NULL_HANDLE
-void vkInitializeDeviceFunctions(VkDevice device);
+void vkSimpleCppInitializeDeviceFunctions(VkDevice device);
 
 // Loads device functions into the provided VkDeviceDispatchTable
 //
@@ -271,7 +271,7 @@ void vkInitializeDeviceFunctions(VkDevice device);
 // The VkDevice handle which the application has created. Must not be VK_NULL_HANDLE
 //  * VkDeviceDispatchTable& table
 // The table in which holds all loaded device function pointers.
-void vkInitializeDeviceDispatchTable(VkDevice device, VkDeviceDispatchTable& table);
+void vkSimpleCppInitializeDeviceDispatchTable(VkDevice device, VkDeviceDispatchTable& table);
 
 #ifdef __cplusplus
 } // extern "C"
@@ -325,7 +325,7 @@ void LoadGlobalFunctions() {
     vkEnumerateInstanceVersion = reinterpret_cast<PFN_vkEnumerateInstanceVersion>(vkGetInstanceProcAddr(VK_NULL_HANDLE, "vkEnumerateInstanceVersion"));
 }
 
-VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr){
+VkResult vkSimpleCppInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr){
     if(pfn_vkGetInstanceProcAddr != VK_NULL_HANDLE){
         vkGetInstanceProcAddr = pfn_vkGetInstanceProcAddr;
         LoadGlobalFunctions();
@@ -347,7 +347,7 @@ VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstancePr
     return VkResult::Success;
 }
 
-void vkCloseLoaderLibrary(){
+void vkSimpleCppCloseLoaderLibrary(){
     if (library != nullptr) {
 #if defined(__linux__) || defined(__APPLE__)
         dlclose(library);

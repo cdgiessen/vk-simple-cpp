@@ -5236,9 +5236,9 @@ const VkVideoEncodeH264RateControlStructureFlagBitsEXT VK_VIDEO_ENCODE_H264_RATE
 const VkVideoEncodeH264RateControlStructureFlagBitsEXT VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT = VkVideoEncodeH264RateControlStructureFlagBitsEXT::FlatBitEXT;
 const VkVideoEncodeH264RateControlStructureFlagBitsEXT VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT = VkVideoEncodeH264RateControlStructureFlagBitsEXT::DyadicBitEXT;
 #endif // defined(VK_ENABLE_BETA_EXTENSIONS)
+#if defined(VK_USE_PLATFORM_FUCHSIA)
 enum class VkImageFormatConstraintsFlagBitsFUCHSIA: uint32_t {
 };
-#if defined(VK_USE_PLATFORM_FUCHSIA)
 enum class VkImageConstraintsInfoFlagBitsFUCHSIA: uint32_t {
     CpuReadRarelyFUCHSIA = 1,
     CpuReadOftenFUCHSIA = 2,
@@ -13340,13 +13340,13 @@ struct VkDeviceDispatchTable {
 //
 // Optional Parameter:
 // PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE
-VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE);
+VkResult vkSimpleCppInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr = VK_NULL_HANDLE);
 
 // Close the Vulkan-Loader and assigns VK_NULL_HANDLE to vkGetInstanceProcAddr
 //
 // Note:
-// After this function is called, no further vulkan calls can be made, except for `vkInitializeLoaderLibrary()`
-void vkCloseLoaderLibrary();
+// After this function is called, no further vulkan calls can be made, except for `vkSimpleCppInitializeLoaderLibrary()`
+void vkSimpleCppCloseLoaderLibrary();
 
 // Initialize the instance and physical device functions into the global function pointers
 // (all functions which take a VkInstance or VkPhysicalDevice as the first parameter)
@@ -13356,7 +13356,7 @@ void vkCloseLoaderLibrary();
 // Parameter:
 // VkInstance instance
 // The VkInstance handle which the application has created. Must not be VK_NULL_HANDLE
-void vkInitializeInstanceFunctions(VkInstance instance);
+void vkSimpleCppInitializeInstanceFunctions(VkInstance instance);
 
 // Loads device functions into the global function pointers
 //
@@ -13368,7 +13368,7 @@ void vkInitializeInstanceFunctions(VkInstance instance);
 // Parameter:
 // VkDevice device
 // The VkDevice handle which the application has created. Must not be VK_NULL_HANDLE
-void vkInitializeDeviceFunctions(VkDevice device);
+void vkSimpleCppInitializeDeviceFunctions(VkDevice device);
 
 // Loads device functions into the provided VkDeviceDispatchTable
 //
@@ -13381,7 +13381,7 @@ void vkInitializeDeviceFunctions(VkDevice device);
 // The VkDevice handle which the application has created. Must not be VK_NULL_HANDLE
 //  * VkDeviceDispatchTable& table
 // The table in which holds all loaded device function pointers.
-void vkInitializeDeviceDispatchTable(VkDevice device, VkDeviceDispatchTable& table);
+void vkSimpleCppInitializeDeviceDispatchTable(VkDevice device, VkDeviceDispatchTable& table);
 
 #ifdef __cplusplus
 } // extern "C"

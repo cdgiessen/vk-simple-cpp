@@ -26,7 +26,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     vk_bootstrap
     GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap
-    GIT_TAG        511cac8db4f9d9d5eda95a6e16af74e0731f5f32
+    GIT_TAG        7aef0dc1c191dbe3392e8abc1b71fd40529295c7
 )
 FetchContent_MakeAvailable(catch2 vk_bootstrap)
 
@@ -36,3 +36,6 @@ if(NOT vma_repoPOPULATED)
     add_library(VulkanMemoryAllocator INTERFACE)
     target_include_directories(VulkanMemoryAllocator INTERFACE ${vma_repo_SOURCE_DIR}/include)
 endif()
+
+cmake_policy(SET CMP0079 NEW)
+target_link_libraries(vk-bootstrap PUBLIC vulkan-simple-cpp)

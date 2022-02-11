@@ -55,7 +55,7 @@ void LoadGlobalFunctions() {
     vkEnumerateInstanceVersion = reinterpret_cast<PFN_vkEnumerateInstanceVersion>(vkGetInstanceProcAddr(VK_NULL_HANDLE, "vkEnumerateInstanceVersion"));
 }
 
-VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr){
+VkResult vkSimpleCppInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr){
     if(pfn_vkGetInstanceProcAddr != VK_NULL_HANDLE){
         vkGetInstanceProcAddr = pfn_vkGetInstanceProcAddr;
         LoadGlobalFunctions();
@@ -77,7 +77,7 @@ VkResult vkInitializeLoaderLibrary(PFN_vkGetInstanceProcAddr pfn_vkGetInstancePr
     return VkResult::Success;
 }
 
-void vkCloseLoaderLibrary(){
+void vkSimpleCppCloseLoaderLibrary(){
     if (library != nullptr) {
 #if defined(__linux__) || defined(__APPLE__)
         dlclose(library);
@@ -226,7 +226,7 @@ PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT vkGetPhysicalDeviceDirectF
 PFN_vkCreateScreenSurfaceQNX vkCreateScreenSurfaceQNX;
 PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX vkGetPhysicalDeviceScreenPresentationSupportQNX;
 #endif // defined(VK_USE_PLATFORM_SCREEN_QNX)
-void vkInitializeInstanceFunctions (VkInstance Instance) {
+void vkSimpleCppInitializeInstanceFunctions (VkInstance Instance) {
     vkDestroyInstance = reinterpret_cast<PFN_vkDestroyInstance>(vkGetInstanceProcAddr(Instance, "vkDestroyInstance"));
     vkEnumeratePhysicalDevices = reinterpret_cast<PFN_vkEnumeratePhysicalDevices>(vkGetInstanceProcAddr(Instance, "vkEnumeratePhysicalDevices"));
     vkGetDeviceProcAddr = reinterpret_cast<PFN_vkGetDeviceProcAddr>(vkGetInstanceProcAddr(Instance, "vkGetDeviceProcAddr"));
@@ -736,7 +736,7 @@ PFN_vkCmdSetColorWriteEnableEXT vkCmdSetColorWriteEnableEXT;
 PFN_vkCmdDrawMultiEXT vkCmdDrawMultiEXT;
 PFN_vkCmdDrawMultiIndexedEXT vkCmdDrawMultiIndexedEXT;
 PFN_vkSetDeviceMemoryPriorityEXT vkSetDeviceMemoryPriorityEXT;
-void vkInitializeDeviceFunctions (VkDevice Device) {
+void vkSimpleCppInitializeDeviceFunctions (VkDevice Device) {
     vkDestroyDevice = reinterpret_cast<PFN_vkDestroyDevice>(vkGetDeviceProcAddr(Device, "vkDestroyDevice"));
     vkGetDeviceQueue = reinterpret_cast<PFN_vkGetDeviceQueue>(vkGetDeviceProcAddr(Device, "vkGetDeviceQueue"));
     vkQueueSubmit = reinterpret_cast<PFN_vkQueueSubmit>(vkGetDeviceProcAddr(Device, "vkQueueSubmit"));
@@ -1123,7 +1123,7 @@ void vkInitializeDeviceFunctions (VkDevice Device) {
     vkCmdDrawMultiIndexedEXT = reinterpret_cast<PFN_vkCmdDrawMultiIndexedEXT>(vkGetDeviceProcAddr(Device, "vkCmdDrawMultiIndexedEXT"));
     vkSetDeviceMemoryPriorityEXT = reinterpret_cast<PFN_vkSetDeviceMemoryPriorityEXT>(vkGetDeviceProcAddr(Device, "vkSetDeviceMemoryPriorityEXT"));
 };
-void vkInitializeDeviceDispatchTable (VkDevice Device, VkDeviceDispatchTable & table) {
+void vkSimpleCppInitializeDeviceDispatchTable (VkDevice Device, VkDeviceDispatchTable & table) {
     table.vkDestroyDevice = reinterpret_cast<PFN_vkDestroyDevice>(vkGetDeviceProcAddr(Device, "vkDestroyDevice"));
     table.vkGetDeviceQueue = reinterpret_cast<PFN_vkGetDeviceQueue>(vkGetDeviceProcAddr(Device, "vkGetDeviceQueue"));
     table.vkQueueSubmit = reinterpret_cast<PFN_vkQueueSubmit>(vkGetDeviceProcAddr(Device, "vkQueueSubmit"));

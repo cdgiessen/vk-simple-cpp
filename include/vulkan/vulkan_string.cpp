@@ -4185,9 +4185,9 @@ std::string to_string(VkVideoEncodeH264RateControlStructureFlagsEXT flag){
     return out.substr(0, out.size() - 3);
 }
 #endif // defined(VK_ENABLE_BETA_EXTENSIONS)
+#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageFormatConstraintsFlagBitsFUCHSIA val) { UNUSED_VARIABLE(val); return "UNKNOWN"; }
 std::string to_string(VkImageFormatConstraintsFlagsFUCHSIA flag){ UNUSED_VARIABLE(flag); return "UNKNOWN"; }
-#if defined(VK_USE_PLATFORM_FUCHSIA)
 const char * to_string(VkImageConstraintsInfoFlagBitsFUCHSIA val) {
     switch(val) {
         case(VkImageConstraintsInfoFlagBitsFUCHSIA::CpuReadRarelyFUCHSIA): return "CpuReadRarelyFUCHSIA";
