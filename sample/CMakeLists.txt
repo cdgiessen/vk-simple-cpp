@@ -29,7 +29,7 @@ add_executable(vk-triangle triangle.cpp)
 target_link_libraries(vk-triangle
     PRIVATE
     vk-simple-cpp-compiler-options
-    vulkan-simple-cpp
+    vk-simple
     glfw
     )
 

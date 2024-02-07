@@ -26,7 +26,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     vk_bootstrap
     GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap
-    GIT_TAG        7aef0dc1c191dbe3392e8abc1b71fd40529295c7
+    GIT_TAG        eab517912c546d7d3c91b0c395194818787c518d
 )
 FetchContent_MakeAvailable(catch2 vk_bootstrap)
 
