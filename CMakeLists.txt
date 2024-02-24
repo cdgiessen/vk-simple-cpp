@@ -13,7 +13,7 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project(vulkan-simple-cpp CXX)
+project(vk-simple-bindings CXX)
 
 option(VK_SIMPLE_CPP_GENERATE_SOURCE "Get dependencies necessary for generating the bindings" off)
 option(VK_SIMPLE_CPP_SAMPLES "Build samples for the bindings, will download glfw" off)
@@ -25,27 +25,27 @@ option(SET_COMPILE_TIME_TRACE "enable clang's -ftime-trace " OFF)
 endif(VK_SIMPLE_CPP_TESTS)
 
 if (VK_SIMPLE_CPP_GENERATE_SOURCE OR VK_SIMPLE_CPP_SAMPLES OR VK_SIMPLE_CPP_TESTS)
-    find_package(PythonInterp 3 QUIET)
+    find_package(FindPython3 QUIET)
 
     include(FetchContent)
     FetchContent_Declare(
         vulkan_headers
         GIT_REPOSITORY https://github.com/KhronosGroup/Vulkan-Headers
-        GIT_TAG        v1.3.204
+        GIT_TAG        v1.3.277
     )
     FetchContent_GetProperties(vulkan-headers)
     if(NOT vulkan_headers_POPULATED)
         FetchContent_Populate(vulkan_headers)
         add_subdirectory(${vulkan_headers_SOURCE_DIR} ${vulkan_headers_BINARY_DIR})
     endif()
-    add_custom_target(copy_source ALL
-        COMMAND ${CMAKE_COMMAND} -E copy ${vulkan_headers_SOURCE_DIR}/registry/vk.xml ${CMAKE_CURRENT_LIST_DIR}/registry/vk.xml
-        COMMAND ${CMAKE_COMMAND} -E copy ${vulkan_headers_SOURCE_DIR}/include/vulkan/vk_platform.h ${CMAKE_CURRENT_LIST_DIR}/include/vulkan/vk_platform.h)
-    add_custom_target(generate_source
-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/generate.py
-        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
-    add_dependencies(generate_source copy_source)
-
+    if (VK_SIMPLE_CPP_GENERATE_SOURCE)
+        add_custom_target(copy_source ALL
+            COMMAND ${CMAKE_COMMAND} -E copy ${vulkan_headers_SOURCE_DIR}/registry/vk.xml ${CMAKE_CURRENT_LIST_DIR}/registry/vk.xml)
+        add_custom_target(generate_source
+            COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/generate.py
+            WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+        add_dependencies(generate_source copy_source)
+    endif()
 endif()
 
 
@@ -92,24 +92,24 @@ target_compile_options(vk-simple-cpp-platform-defines INTERFACE
         $<$<BUILD_WSI_WAYLAND_SUPPORT>:-DVK_USE_PLATFORM_WAYLAND_KHR>>
     )
 
-add_library(vulkan-simple-cpp STATIC
-    ${CMAKE_CURRENT_LIST_DIR}/include/vulkan/vulkan.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/vulkan/vulkan.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/include/vulkan/vulkan_string.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/vulkan/vulkan_string.cpp)
-target_include_directories(vulkan-simple-cpp BEFORE PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
-target_include_directories(vulkan-simple-cpp PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/vulkan)
-target_link_libraries(vulkan-simple-cpp PUBLIC vk-simple-cpp-compiler-options)
-target_compile_features(vulkan-simple-cpp PUBLIC cxx_std_14)
-set_target_properties(vulkan-simple-cpp PROPERTIES CXX_STANDARD 14)
-set_target_properties(vulkan-simple-cpp PROPERTIES LINKER_LANGUAGE CXX)
+add_library(vk-simple INTERFACE
+    ${CMAKE_CURRENT_LIST_DIR}/include/vk-simple/vk-simple.h)
+target_include_directories(vk-simple INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
+target_link_libraries(vk-simple INTERFACE vk-simple-cpp-compiler-options)
+target_compile_features(vk-simple INTERFACE cxx_std_14)
+set_target_properties(vk-simple PROPERTIES CXX_STANDARD 14)
+set_target_properties(vk-simple PROPERTIES LINKER_LANGUAGE CXX)
+
+if (VK_SIMPLE_CPP_GENERATE_SOURCE OR VK_SIMPLE_CPP_SAMPLES OR VK_SIMPLE_CPP_TESTS)
+    target_link_libraries(vk-simple INTERFACE Vulkan::Headers)
+endif()
 
 if (NOT WIN32)
-    target_link_libraries(vulkan-simple-cpp PUBLIC ${CMAKE_DL_LIBS})
+    target_link_libraries(vk-simple INTERFACE ${CMAKE_DL_LIBS})
 endif()
 
 if (SET_COMPILE_TIME_TRACE)
-    target_compile_options(vulkan-simple-cpp PUBLIC -ftime-trace)
+    target_compile_options(vk-simple PUBLIC -ftime-trace)
 endif(SET_COMPILE_TIME_TRACE)
 
 if (VK_SIMPLE_CPP_SAMPLES)
@@ -120,6 +120,6 @@ if (VK_SIMPLE_CPP_TESTS)
     add_subdirectory(test)
 endif (VK_SIMPLE_CPP_TESTS)
 
-if (VK_SIMPLE_CPP_GENERATE_SOURCE OR VK_SIMPLE_CPP_SAMPLES OR VK_SIMPLE_CPP_TESTS)
-    add_dependencies(vulkan-simple-cpp generate_source)
+if (VK_SIMPLE_CPP_GENERATE_SOURCE)
+    add_dependencies(vk-simple generate_source)
 endif()
